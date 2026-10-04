@@ -1,0 +1,24 @@
+<!-- <form [formGroup]="formGroup"> -->
+  <div class="form-group">
+    <label [for]="label">{{ label | abpLocalization }}</label>
+    <input
+      [type]="type"
+      class="form-control"
+      [id]="label"
+      [placeholder]="placeholder | abpLocalization"
+      [disabled]="disabled"
+      [required]="required"   
+      [min]="min"
+      [max]="max"
+      [(ngModel)]="value"
+      (input)="emitInputTextValue($event.target.value)"
+    />
+    <!-- [pattern]="pattern" -->
+    <div *ngIf="formGroup.get('inputValue')?.invalid && formGroup.get('inputValue')?.touched">
+     <span *ngIf="formGroup.get('inputValue')?.errors?.['required']">{{ label }} is required</span> 
+      <span *ngIf="formGroup.get('inputValue')?.errors?.['pattern']">Invalid {{ label }}</span>
+      <span *ngIf="formGroup.get('inputValue')?.errors?.['min']">Minimum value is {{ min }}</span>
+      <span *ngIf="formGroup.get('inputValue')?.errors?.['max']">Maximum value is {{ max }}</span>
+    </div>
+  </div>
+<!-- </form> -->

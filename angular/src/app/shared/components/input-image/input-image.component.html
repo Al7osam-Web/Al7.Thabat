@@ -1,0 +1,112 @@
+<div *ngIf="!selectedFile || !url">
+  <div class="input-image">
+    <input
+      id="file-upload{{ name }}"
+      [name]="name"
+      type="file"
+      [accept]="accept"
+      (change)="onUploadImage($event)"
+      [disabled]="disabled"
+    />
+    <div class="custom-image-upload">
+      <label class="f-6 w-100 cursor-pointer mb-0" for="file-upload{{ name }}">
+        <div class="w-100 status-text">
+          <span class="f-6 d-inline-block w-100">
+            {{ '::shared.upload' | abpLocalization }}
+          </span>
+          <!-- <span *ngIf="selectedFile" class="error-red f-6" (click)="removeImage()">
+            {{ '::Common.RemoveFile'| abpLocalization  }}
+          </span> -->
+        </div>
+      </label>
+      <div class="chosen-image">
+        <label for="file-upload{{ name }}" class="mb-0">
+          <span class="pi pi-cloud-upload"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <p class="mt-1 mt-1 fw-400 text-muted fs-14">
+    يجب أن تكون الملفات بصيغة ( PDF أو PNG أو JPEG ) ولا يتجاوز حجمها 1 ميجابايت وأبعاد 600×800 بكسل
+  </p>
+</div>
+<div class="mt-2 row" *ngIf="selectedFile">
+  <div class="col-md-6 position-relative">
+    <!-- Image preview -->
+    <img
+      *ngIf="
+        selectedFile?.path != null &&
+        !(selectedFile?.path?.endsWith('.pdf') || selectedFile?.type == 'application/pdf')
+      "
+      [src]="selectedFile?.path"
+      alt="image"
+      class="rounded img-view"
+    />
+
+    <!-- PDF preview -->
+    <div *ngIf="selectedFile?.path?.endsWith('.pdf') || selectedFile?.type == 'application/pdf'">
+      <a
+        href="{{ selectedFile?.path }}"
+        target="_blank"
+        [disabled]="selectedFile?.type == 'application/pdf'"
+      >
+        <i title="فتح الملف" class="fi fi-rr-file-pdf" style="font-size: 10em"></i>
+      </a>
+      <p>
+        {{ selectedFile?.fileName }}
+      </p>
+    </div>
+
+    <!-- Word file preview -->
+    <div
+      *ngIf="
+        selectedFile?.type === 'application/msword' ||
+        selectedFile?.type ===
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      "
+    >
+      <p>
+        {{ selectedFile?.fileName }}
+      </p>
+    </div>
+
+    <button
+      *ngIf="selectedFile && url && !disabled"
+      class="btn btn-customDanger delete-img"
+      (click)="removeImage()"
+    >
+      <i class="fa fa-times text-danger"></i>
+    </button>
+  </div>
+</div>
+<!-- <div class="mt-2 row" *ngIf="fielType">
+    <div class="col-md-6 position-relative">
+      <img
+        *ngIf="fielType ==='image'"
+        [src]="url"
+        alt="image"
+        class="rounded img-view"
+      />
+      <div *ngIf="selectedFile.type === 'application/pdf'">
+        <p>
+          {{ selectedFile.fileName }}
+        </p>
+      </div>
+  
+      <div
+        *ngIf="
+          selectedFile.type === 'application/msword' ||
+          selectedFile.type ===
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        "
+      >
+        <p>
+          {{ selectedFile.fileName }}
+        </p>
+      </div>
+  
+      <button class="btn btn-customDanger delete-img" (click)="removeImage()">
+        <i class="fa fa-times text-danger"></i>
+      </button>
+    </div>
+  </div> -->

@@ -1,0 +1,1053 @@
+<div NcrsRtl class="grid-wrapper w-100 new-grid">
+  <div class="w-100 fixed-height-table">
+    <div class="column-toggle mb-4">
+      <div class="row align-items-center">
+        <div class="col-md-4 col-lg-3 mb-2">
+          <p-multiSelect
+            class="light-dropdown btn-light"
+            [options]="columns"
+            [(ngModel)]="selectedColumns"
+            optionDisabled="alwaysVisible"
+            optionLabel="name"
+            [filter]="false"
+            [ngModelOptions]="{ standalone: true }"
+            (onChange)="onColumnToggle($event)"
+            placeholder="{{ '::DataTable:Columns' | abpLocalization }}"
+            [displaySelectedLabel]="false"
+            showToggleAll="false"
+            showClear="false"
+          />
+        </div>
+        <div class="col-md-4 col-lg-3 mb-2">
+          <p-dropdown
+            *ngIf="actions.length"
+            class="small-dropdown table-dropdown light-dropdown"
+            [options]="groupActions"
+            [(ngModel)]="selectedAction"
+            optionLabel="title"
+            class="mr-2"
+            (onChange)="handleActionChange($event)"
+            placeholder="{{ '::Actions' | abpLocalization }}"
+          />
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="dataList">
+      <p-table
+        #ADVGrid
+        stripedRows
+        [value]="dataList"
+        [columns]="columns" 
+        [paginator]="paginator"
+        [rows]="pageSize"
+        [rowsPerPageOptions]="rowsPerPageOptions"
+        [responsive]="responsive"
+        [totalRecords]="totalRecordsLength"
+        [styleClass]="styleClass"
+        [lazy]="true"
+        [loading]="loading"
+        [currentPageReportTemplate]="currentPageReportTemplate"
+        [showCurrentPageReport]="true"
+        [selectionPageOnly]="true"
+        [exportHeader]="'customExportHeader'" 
+        [scrollable]="true"
+        [sortMode]="sortable ? 'multiple' : ''"
+        [dataKey]="recordKey"
+        [(selection)]="selectedRecords"
+        (onFilter)="onFilterChange($event)"
+        (onPage)="onPageChange($event)"
+        (onSort)="onSort($event)"
+        (selectionChange)="onSelectionChange($event)"
+      >
+      <ng-template pTemplate="caption" ng *ngIf="isExportExcel">
+        <div style="text-align: left">
+            <p-button 
+                icon="pi pi-file-excel" 
+                severity="success" 
+
+                label="{{'::Export'| abpLocalization }}" 
+                (onClick)="onExportRequested()" />
+        </div>
+    </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="check-box-header" *ngIf="canSelect" scope="checkbox"
+            [ngStyle]="{width:  'calc(0%)' }"
+            >
+              <p-tableHeaderCheckbox
+                *ngIf="viewMood === TableViewMood.RecordsView"
+                id=""
+              ></p-tableHeaderCheckbox>
+            </th>
+            <th
+              id=""
+              [ngClass]="{ 'd-none': col.hidden, 'hide-sort': col.removeSorting }"
+              [ngStyle]="{
+                width: col.width
+                  ? 'calc(100% / ' + columns.length + ' * ' + col.width + ')'
+                  : 'calc(100% / ' + columns.length + ')',
+                minWidth: col.minWidth
+              }"
+              *ngFor="let col of columns; trackBy: trackByIndex"
+              [scope]="col.field"
+              [pSortableColumn]="col.field"
+            >
+              <p-sortIcon *ngIf="!col.removeSorting" [field]="col.field"></p-sortIcon>
+              {{ col.name | abpLocalization }}
+              <ngx-text-filter
+                *ngIf="
+                  isAdvancedFilter &&
+                 (col.type !== TableHeaderType.Enum ||  col.type !== TableHeaderType.Enum) &&
+
+                  col.type !== TableHeaderType.ApprovalState &&
+                  !col.removeFlitter &&
+                  col.isSimpleFilter
+                "
+                matchMode="contains"
+                [type]="col.type!"
+                [field]="col.field"
+                [matchModeOptions]="['contains']"
+              />
+              <p-columnFilter
+                *ngIf="
+                  isAdvancedFilter &&
+                 (col.type !== TableHeaderType.Enum ||  col.type !== TableHeaderType.Enum) &&
+                  col.type !== TableHeaderType.ApprovalState &&
+                  !col.removeFlitter &&
+                  !col.isSimpleFilter
+                "
+                [type]="col.type!"
+                [field]="col.field"
+                [placeholder]="col.name | abpLocalization"
+                display="menu"
+              ></p-columnFilter>
+              <p-columnFilter
+                *ngIf="
+                  isAdvancedFilter &&
+                 (col.type !== TableHeaderType.Enum ||  col.type !== TableHeaderType.Enum) &&
+                  col.type == TableHeaderType.ApprovalState &&
+                  !col.removeFlitter
+                "
+                type="boolean"
+                [field]="col.field"
+                display="menu"
+              ></p-columnFilter>
+              <ngx-enum-filter
+                *ngIf="isAdvancedFilter && (col.type === TableHeaderType.Enum ||  col.type === TableHeaderType.Enum) && !col.removeFlitter"
+                [enum]="col.enum"
+                [field]="col.field"
+                [column]="col.name"
+                (filterMetadata)="onFilterChange($event)"
+              ></ngx-enum-filter>
+            </th>
+
+            <th
+              class="action-header justify-content-center action"
+              *ngIf="actions.length"
+              [scope]="'actions'"
+              [ngStyle]="{width:  'calc(0%)' }"
+              pFrozenColumn
+            >
+              {{ '::Actions' | abpLocalization }}
+            </th>
+          </tr>
+          <tr class="search-tr" *ngIf="!isAdvancedFilter">
+            <th class="check-box-header"></th>
+            <th
+              id=""
+              [ngClass]="{ 'd-none': col.hidden, 'hide-sort': col.removeSorting }"
+              [ngStyle]="{
+                width: col.width
+                  ? 'calc(100% / ' + columns.length + ' * ' + col.width + ')'
+                  : 'calc(100% / ' + columns.length + ')',
+                minWidth: col.minWidth
+              }"
+              *ngFor="let col of columns; trackBy: trackByIndex"
+              class="p-1 pt-0"
+            >
+              <div class="headerTableItem" *ngIf="col.type == 'text'">
+                <p-columnFilter
+                  *ngIf="
+                    col.type !== TableHeaderType.Enum &&
+                    col.type !== TableHeaderType.ApprovalState &&
+                    !col.removeFlitter
+                  "
+                  placeholder=" {{ '::Search' | abpLocalization }}..."
+                  [type]="col.type!"
+                  [field]="col.field"
+                  [matchMode]="'contains'"
+                ></p-columnFilter>
+              </div>
+              <div class="headerTableItem" *ngIf="col.type == 'date'">
+                <p-columnFilter
+                  matchMode="date"
+                  type="date"
+                  [field]="col.field + 'From'"
+                  [matchModeOptions]="['date']"
+                  placeholder="{{ '::StartDate' | abpLocalization }}"
+                />
+                <p-columnFilter
+                  matchMode="date"
+                  type="date"
+                  [field]="col.field + 'To'"
+                  [matchModeOptions]="['date']"
+                  placeholder="{{ '::EndDate' | abpLocalization }}"
+                />
+              </div>
+
+              <div class="headerTableItem" *ngIf="col.type == 'numeric'">
+                <p-columnFilter
+                  matchMode="greaterthan"
+                  type="text"
+                  [field]="col.field  + 'From'"
+                  [matchModeOptions]="['greaterthan']"
+                  placeholder="{{ '::From' | abpLocalization }}"
+
+                />
+                <p-columnFilter
+                  matchMode="lessthan"
+                  type="text"
+                  [field]="col.field + 'To'"
+                  [matchModeOptions]="['lessthan']"
+                  placeholder="{{ '::To' | abpLocalization }}"
+
+                />
+              </div>
+
+              <div
+                class="headerTableItem"
+                *ngIf="col.type === TableHeaderType.Enum && !col.removeFlitter"
+                [enum]="col.enum"
+              >
+                <ngx-enum-filter
+                  [field]="col.field"
+                  [column]="col.name"
+                  [isAdvancedFilter]="false"
+                  [enum]="col.enum"
+                  (filterMetadata)="onFilterChange($event)"
+                ></ngx-enum-filter>
+              </div>
+            </th>
+            <th class="justify-content-center" pFrozenColumn>
+              <div class="action-cell">
+                <!-- <button class="btn  btn-light  btn-icon-table  " (click)="onFilterChange()">
+                  <i class="fi fi-br-search"></i>
+                </button> -->
+                <button
+                  class="btn btn-outline-primary btn-icon-table ms-2"
+                  (click)="clearFilters()"
+                >
+                  <i class="fi fi-br-rotate-right"></i>
+                </button>
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData>
+          <ng-container
+            *ngTemplateOutlet="
+              viewMood === TableViewMood.RecordsView ? recordsView : treeView;
+              context: { $implicit: rowData }
+            "
+          ></ng-container>
+        </ng-template>
+
+        <!-- If u want to use grouping tree view -->
+        <ng-template #treeView let-rowData>
+          <tr class="group-row">
+            <td
+              [class]="'w-100 ' + 'level-' + rowData.index"
+              colspan="999"
+              (click)="rowData.isExpanded = !rowData.isExpanded"
+            >
+              <i *ngIf="rowData.isExpanded" class="pi pi-angle-down"></i>
+              <i *ngIf="!rowData.isExpanded" class="pi pi-angle-right"></i>
+
+              <span class="key-name"> {{ rowData['key'] }} - ( {{ rowData['count'] }} ) </span>
+            </td>
+          </tr>
+          <ng-container *ngIf="rowData.isExpanded">
+            <ng-container *ngFor="let item of rowData['items']; trackBy: trackByIndex">
+              <ng-container
+                *ngTemplateOutlet="
+                  item['key'] ? treeView : recordsView;
+                  context: { $implicit: item }
+                "
+              ></ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+
+        <!-- Normal view with its cases -->
+        <ng-template #recordsView let-rowData>
+          <!-- add class newrow for   -->
+          <tr
+            [ngClass]="{
+              'clickable-row': isRowClickable,
+              'new-row': rowData['lastModificationTime'] === null && isDataInput,
+              'last-group': rowData['isLast'] == true 
+
+            }"
+          >
+            <td *ngIf="canSelect" class="check-box-header">
+              <p-tableCheckbox [id]="rowData.id" [value]="rowData"></p-tableCheckbox>
+            </td>
+            <td
+              *ngFor="let col of columns; trackBy: trackByIndex"
+              (click)="onRowClicked(rowData.id)"
+              [ngClass]="{
+                'd-none': col.hidden,
+                'notActive-row':
+                  rowData[col.field] === false && col.type == TableHeaderType.ApprovalState,
+                isSpecial: rowData[col.field] === true && col.type == TableHeaderType.Special
+              }"
+              [ngStyle]="{
+                width: col.width
+                  ? 'calc(100% / ' + columns.length + ' * ' + col.width + ')'
+                  : 'calc(100% / ' + columns.length + ')',
+                minWidth: col.minWidth
+              }"
+            >
+              <div [ngSwitch]="col.type" *ngIf="!isDataInput || (rowData['isCantEdit'] !=null  && rowData['isCantEdit'] == true)">
+                <!-- Statues --Enum  -->
+                <!-- <span [class]="rowData[col.field] + ' status-chip'" *ngSwitchCase="TableHeaderType.Enum">{{
+                  module +
+                  '.statusTypes.' +
+                  getEnumKeyByEnumValue(col.enum, rowData[col.field])
+                  | abpLocalization
+                  }}</span> -->
+
+                <!-- sortNumber Switcher  -->
+                <!-- button up and down -->
+                <div *ngSwitchCase="TableHeaderType.Switch" class="sortNumber">
+                  <button
+                    class="btn btn-icon-table"
+                    (click)="onTakeCommand(col, col.field, rowData, 'up')"
+                  >
+                    <i class="fi fi-br-arrow-up"></i>
+                  </button>
+                  <button
+                    class="btn btn-icon-table"
+                    (click)="onTakeCommand(col, col.field, rowData, 'down')"
+                  >
+                    <i class="fi fi-br-arrow-down"></i>
+                  </button>
+                </div>
+
+                <!-- button  template-->
+
+
+
+
+     <div *ngSwitchCase="TableHeaderType.IdSelect">
+                  <p-iconField iconPosition="left" class="spinner-loading">
+                    <p-inputIcon
+                      [styleClass]="{
+                        'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                        'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                      }"
+                    />
+                    <div
+                      class="dropdown-value"
+                      [ngClass]="{'dropdown-status': !col.disabled}"
+                      [class]=" col.cssClass + '  ' + col.pipeName+'-'+rowData[col.field]"
+                      (click)="!col.disabled && op.toggle($event)"
+                    >
+                      {{ getEnumKeyByEnumValue(col.enum, rowData[col.field]) || col.name }}
+                    </div>
+                  </p-iconField>
+                </div>
+
+
+
+                <!-- Statues --Enum -->
+                <!--  -->
+                <p-iconField
+                  iconPosition="left"
+                  *ngSwitchCase="TableHeaderType.Enum"
+                  class="spinner-loading"
+                >
+                  <p-inputIcon
+                    [styleClass]="{
+                      'pi pi-spinner pi-spin': isRowLoaded(rowData, col.field),
+                      'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                    }"
+                  />
+
+                  <p-dropdown
+                    *ngSwitchCase="TableHeaderType.Enum"
+                    [(ngModel)]="rowData[col.field]"
+                    [options]="col.enum | keyvalue"
+                    optionLabel="key"
+                    optionValue="value"
+                    placeholder="Select a {{ col.name }}"
+                    [required]="col.required"
+                    [disabled]="col.disabled || (rowData['isCantEdit'] !=null  && rowData['isCantEdit'] == true)"
+                    (onChange)="onStatusChange(col, rowData.id, rowData[col.field])"
+                  >
+                  </p-dropdown>
+                </p-iconField>
+                <!-- Number template -->
+                <span *ngSwitchCase="TableHeaderType.Numeric">
+                  <ng-container *ngIf="rowData[col.field]?.length > 1000; else normalNumerical">
+                    {{ rowData[col.field] | number : '1.2-2' }}
+                  </ng-container>
+                  <ng-template #normalNumerical>
+                    {{ rowData[col.field] }}
+                  </ng-template>
+                </span>
+
+                <!-- Date template -->
+                <span *ngSwitchCase="TableHeaderType.Date">
+                  {{ rowData[col.field] | date : 'yyyy/MM/dd hh:mm a ' }}
+                </span>
+                
+                <!-- pic-->
+
+                <span *ngSwitchCase="TableHeaderType.Pic">
+                  <div class="flex justify-content-center gap-2">
+                    <p-image 
+                    *ngIf="rowData[col.field]"
+                    src="{{backendUrl + rowData[col.field]}}" 
+                    alt="Image" 
+                    width="40" 
+                    [preview]="true" />  
+                    <!-- <p-tag
+                      *ngIf="rowData[col.field]"
+                      (click)="op.toggle($event)"
+                      value="{{ '::Show' | abpLocalization }}"
+                      [rounded]="true"
+                      style="cursor: pointer"
+                    ></p-tag> -->
+                  </div>
+                </span>
+                <div *ngSwitchCase="TableHeaderType.Rating" class="rating-cell" (click)="col.command?.({ id: rowData.id, data: rowData })">
+                  <p-rating
+                    [(ngModel)]="rowData[col.field] "
+                    [readonly]="true"
+                    [cancel]="false"
+                    [stars]="5"
+                    [styleClass]="'rating-stars'"
+                  ></p-rating>
+                  <small *ngIf="rowData[col.extraData?.countField || 'ratingsCount']">
+                    ({{ rowData[col.extraData?.countField || 'ratingsCount'] }})
+                  </small>
+                </div>
+          <!-- Custom -->
+          <div *ngSwitchCase="TableHeaderType.Custom" (click)="rowData(col, rowData.id, rowData)">
+            <span [innerHTML]="col.extraData?.customElementHtml"></span>
+          </div>
+
+          <div *ngSwitchCase="TableHeaderType.RedirectTo">
+            <p-button (click)="onApproveChange(col, rowData.id, rowData[col.field])"  *ngIf="rowData[col.field] != null">
+              <i class="{{ col.extraData?.icon}}" style="margin-left: 5px;"  > </i>
+              {{ col.extraData?.label | abpLocalization }}
+            </p-button>
+        </div>
+
+
+ 
+    <!-- ApprovalButton State -->
+    <div *ngSwitchCase="TableHeaderType.ApprovalButton">
+      <span *ngIf="rowData[col.field] == true || rowData[col.field] == 'true'  && col.extraData?.approvedLabel != null">
+        <em class="approved-chip chip-availability">
+          {{ col.extraData?.approvedLabel | abpLocalization }}
+        </em>
+        <p-button (click)="onApproveChange(col, rowData.id, rowData[col.field])" *ngIf="col.extraData?.rejectedBtnLabel != null">
+          {{ col.extraData?.rejectedBtnLabel | abpLocalization }}
+        </p-button>
+      </span>
+      <span *ngIf="rowData[col.field] == false || rowData[col.field] == 'false' && col.extraData?.rejectedLabel != null">
+        <em class="approved-chip reject chip-availability">
+          {{ col.extraData?.rejectedLabel | abpLocalization }}
+        </em>
+        <p-button (click)="onApproveChange(col, rowData.id, rowData[col.field])"  *ngIf="col.extraData?.approvedBtnLabel != null">
+          {{ col.extraData?.approvedBtnLabel | abpLocalization }}
+        </p-button>
+      </span>
+    </div>
+                <!-- Approval State -->
+                <span *ngSwitchCase="TableHeaderType.ApprovalState">
+                  <em class="approved-chip" *ngIf="rowData[col.field]">
+                    {{ col.extraData?.approvedLabel | abpLocalization }}
+                  </em>
+                  <em class="approved-chip reject" *ngIf="rowData[col.field] === false">
+                    {{ col.extraData?.rejectedLabel | abpLocalization }}
+                  </em>
+                </span>
+
+                <!-- Approval State -->
+                <span *ngSwitchCase="TableHeaderType.Link">
+                  <a
+                    class="approved-chip"
+                    routerLink="{{
+                      col.extraData?.link + rowData[col.field] + '/' + col.extraData?.linkType
+                    }}"
+                  >
+                    {{ col.extraData?.linkName | abpLocalization }}
+                  </a>
+                </span>
+                <!-- Avatar -->
+                <span *ngSwitchCase="TableHeaderType.Avatar">
+                  <div class="avatar-container">
+                    <img
+                      *ngFor="
+                        let avatar of rowData[col.field];
+                        trackBy: trackByIndex;
+                        let i = index
+                      "
+                      [class]="'order-' + i"
+                      [src]="avatar.avatar"
+                      alt=""
+                      srcset=""
+                    />
+                  </div>
+                </span>
+
+                <span *ngSwitchDefault> {{ rowData[col.field] }}</span>
+              </div>
+              <div [ngSwitch]="col.type" *ngIf="isDataInput  &&  (rowData['isCantEdit'] ==null  || rowData['isCantEdit'] == false)">
+
+                <div *ngSwitchCase="TableHeaderType.Enum">
+                  <p-iconField iconPosition="left" class="spinner-loading">
+                    <p-inputIcon
+                      [styleClass]="{
+                        'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                        'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                      }"
+                    />
+     
+
+                    <p-dropdown
+                      [(ngModel)]="rowData[col.field]"
+                      [options]="col.enum | keyvalue"
+                      optionLabel="key"
+                      optionValue="value"
+                      placeholder="{{ col.name }}"
+                      [ngClass]="{'dropdown-status': !col.disabled}"
+                      [class]=" col.cssClass + '  ' + col.pipeName+'-'+rowData[col.field]"
+             
+                      [required]="col.required"
+                      [disabled]="true"
+                      (click)="!col.disabled && op.toggle($event)"
+                    >
+                    </p-dropdown>
+                  </p-iconField>
+ 
+                  <p-overlayPanel  #op    >
+                    <p-iconField iconPosition="left" class="spinner-loading">
+                      <p-inputIcon
+                        [styleClass]="{
+                          'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                          'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                        }"
+                      />
+ 
+                      <div class="status-dropdown">
+                        <p-listbox
+                          [(ngModel)]="rowData[col.field]"
+                          [options]="col.enum | keyvalue"
+                          optionLabel="key"
+                          optionValue="value"
+                          placeholder="{{ col.name }}"
+                          [filter]="true"
+                       
+                          [required]="col.required"
+                          [disabled]="col.disabled"
+                          (onChange)="onDataChange(rowData, col.field,col.required)"
+                        />
+                        <!-- isCanAddItem -->
+                      </div>
+                    </p-iconField>
+                  </p-overlayPanel>
+                </div>
+
+        <div *ngSwitchCase="TableHeaderType.IdSelect">
+                  <p-iconField iconPosition="left" class="spinner-loading">
+                    <p-inputIcon
+                      [styleClass]="{
+                        'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                        'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                      }"
+                    />
+                    <p-dropdown
+                      [(ngModel)]="rowData[col.field]"
+                      [options]="col.enum | keyvalue"
+                      optionLabel="key"
+                      optionValue="value"
+                      placeholder="{{ col.name }}"
+                      [ngClass]="{'dropdown-status': !col.disabled}"
+                      [class]=" col.cssClass + '  ' + col.pipeName+'-'+rowData[col.field]"
+             
+                      [required]="col.required"
+                      [disabled]="true"
+                      (click)="!col.disabled && op.toggle($event)"
+                    >
+                    </p-dropdown>
+                  </p-iconField>
+ 
+                  <p-overlayPanel  #op    >
+                    <p-iconField iconPosition="left" class="spinner-loading">
+                      <p-inputIcon
+                        [styleClass]="{
+                          'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                          'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                        }"
+                      />
+ 
+                      <div class="status-dropdown">
+                        <p-listbox
+                          [(ngModel)]="rowData[col.field]"
+                          [options]="col.enum | keyvalue"
+                          optionLabel="key"
+                          optionValue="value"
+                          placeholder="{{ col.name }}"
+                          [filter]="true"
+                       
+                          [required]="col.required"
+                          [disabled]="col.disabled"
+                          (onChange)="onDataChange(rowData, col.field,col.required)"
+                        />
+                        <!-- isCanAddItem -->
+                      </div>
+                    </p-iconField>
+                  </p-overlayPanel>
+                </div>
+
+                <div *ngSwitchCase="TableHeaderType.MultiSelect">
+                  <p-iconField iconPosition="left" class="spinner-loading select-clients">
+                    <p-inputIcon
+                      [styleClass]="{
+                        'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                        'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                      }"
+                    />
+                        <p *ngIf="getColumnNames(rowData, col) != ''" (click)="op.toggle($event)" class="mb-0 d-flex justify-content-center gap-2 align-items-center">{{ getColumnNames(rowData, col) }} <i class="fi fi-rr-angle-small-left text-primary"></i></p>
+                        <p *ngIf="getColumnNames(rowData, col) == ''" (click)="op.toggle($event)" class="mb-0 d-flex justify-content-center gap-2 align-items-center text-primary">إختر العملاء <i class="fi fi-rr-angle-small-left text-primary"></i></p>
+                  </p-iconField>
+
+                  <p-overlayPanel #op (onshow)="openMultiSelect()">
+                    <p-iconField iconPosition="left" class="spinner-loading">
+                      <p-inputIcon
+                        [styleClass]="{
+                          'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                          'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                        }"
+                      />
+                      <!-- MultiSelect -->
+
+                      <p-multiSelect
+                        *ngSwitchCase="TableHeaderType.MultiSelect"
+                        #multiSelect
+                        [(ngModel)]="rowData[col.field]"
+                        [ngModelOptions]="{ standalone: true }"
+                        [options]="col.options"
+                        optionLabel="name"
+                        placeholder="{{ col.name }}"
+                        showToggleAll="false"
+                        showClear="false"
+                        (onChange)="onDataChange(rowData, col.field,col.required)"
+                      >
+                      </p-multiSelect>
+                    </p-iconField>
+                  </p-overlayPanel>
+                </div>
+
+                <p-iconField
+                  *ngSwitchCase="TableHeaderType.Numeric"
+                  iconPosition="left"
+                  class="spinner-loading"
+                >
+                  <p-inputIcon
+                    [styleClass]="{
+                      'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                      'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                    }"
+                  />
+                  <!-- Number template -->
+                  <p-inputNumber
+                    *ngSwitchCase="TableHeaderType.Numeric"
+                    [(ngModel)]="rowData[col.field]"
+                    mode="decimal"
+                    [min]="0"
+                    [step]="0.01"
+                    [useGrouping]="false"
+                    [required]="col.required"
+                    [disabled]="col.disabled"
+                    (ngModelChange)="onDataChange(rowData, col.field,col.required)"
+                  >
+                  </p-inputNumber>
+                </p-iconField>
+
+                <p-iconField
+                *ngSwitchCase="TableHeaderType.Date"
+                iconPosition="left"
+                class="spinner-loading"
+              >
+                <p-inputIcon
+                  [styleClass]="{
+                    'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                    'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                  }"
+                />
+                <!-- Date template -->
+
+                <p-calendar
+                  class="calendar-icon"
+                  *ngSwitchCase="TableHeaderType.Date"
+                  [(ngModel)]="rowData[col.field]"
+                  [showIcon]="true"
+                  dateFormat="yy-mm-dd hh:mm a"
+                  [showTime]="true" 
+                  [hourFormat]="12" 
+                  placeholder="{{ rowData[col.field] | date : 'yyyy/MM/dd hh:mm a ' }}"
+                  [required]="col.required"
+                  [disabled]="true"
+                  (click)="calendarop.toggle($event)" 
+                >
+                </p-calendar>
+              </p-iconField>
+
+                <p-overlayPanel #calendarop (onshow)="openMultiSelect()">
+
+                <p-iconField
+                  *ngSwitchCase="TableHeaderType.Date"
+                  iconPosition="left"
+                  class="spinner-loading"
+                >
+                  <p-inputIcon
+                    [styleClass]="{
+                      'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                      'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                    }"
+                  />
+                  <!-- Date template -->
+
+                  <p-calendar
+                    class="calendar-icon"
+                    *ngSwitchCase="TableHeaderType.Date"
+                    [(ngModel)]="rowData[col.field]"
+                    [showIcon]="true"
+                    dateFormat="yy-mm-dd hh:mm a"
+                    [showTime]="true" 
+                    [hourFormat]="12" 
+                    placeholder="{{ rowData[col.field] | date : 'yyyy/MM/dd hh:mm a ' }}"
+                    [required]="col.required"
+                    [disabled]="col.disabled"
+                    (onSelect)="onDataChange(rowData, col.field,col.required)"
+                    [inline]="true"
+                  >
+                  </p-calendar>
+                </p-iconField>
+
+                </p-overlayPanel>
+
+
+                <!-- Approval State -->
+                <p-iconField
+                  *ngSwitchCase="TableHeaderType.ApprovalState"
+                  iconPosition="left"
+                  class="spinner-loading"
+                >
+                  <p-inputIcon
+                    [styleClass]="{
+                      'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                      'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                    }"
+                  />
+                  <p-dropdown
+                    [(ngModel)]="rowData[col.field]"
+                    [options]="[
+                      { label: col.extraData?.approvedLabel | abpLocalization, value: true },
+                      { label: col.extraData?.rejectedLabel | abpLocalization, value: false }
+                    ]"
+                    placeholder="Select approval state"
+                    [required]="col.required"
+                    [disabled]="col.disabled"
+                    (change)="onDataChange(rowData, col.field,col.required)"
+                  >
+                  </p-dropdown>
+                </p-iconField>
+
+
+    <!-- Approval State -->
+    <span *ngSwitchCase="TableHeaderType.ApprovalState">
+      <em class="approved-chip" *ngIf="rowData[col.field]">
+        {{ col.extraData?.approvedLabel | abpLocalization }}
+      </em>
+      <em class="approved-chip reject" *ngIf="rowData[col.field] === false">
+        {{ col.extraData?.rejectedLabel | abpLocalization }}
+      </em>
+    </span>
+    <!-- ApprovalButton State -->
+    <div *ngSwitchCase="TableHeaderType.ApprovalButton">
+      <span *ngIf="rowData[col.field] == true || rowData[col.field] == 'true'  && col.extraData?.approvedLabel != null">
+        <em class="approved-chip chip-availability">
+          {{ col.extraData?.approvedLabel | abpLocalization }}
+        </em>
+        <p-button (click)="onApproveChange(col, rowData.id, rowData[col.field])" *ngIf="col.extraData?.rejectedBtnLabel != null">
+          {{ col.extraData?.rejectedBtnLabel | abpLocalization }}
+        </p-button>
+      </span>
+      <span *ngIf="rowData[col.field] == false || rowData[col.field] == 'false' && col.extraData?.rejectedLabel != null">
+        <em class="approved-chip reject chip-availability">
+          {{ col.extraData?.rejectedLabel | abpLocalization }}
+        </em>
+        <p-button (click)="onApproveChange(col, rowData.id, rowData[col.field])"  *ngIf="col.extraData?.approvedBtnLabel != null">
+          {{ col.extraData?.approvedBtnLabel | abpLocalization }}
+        </p-button>
+      </span>
+    </div>
+
+    <div *ngSwitchCase="TableHeaderType.RedirectTo">
+        <p-button (click)="onApproveChange(col, rowData.id, rowData[col.field])"  *ngIf="rowData[col.field] != null">
+          <i class="{{ col.extraData?.icon}}" style="margin-left: 5px;"  > </i>
+          {{ col.extraData?.label | abpLocalization }}
+        </p-button>
+    </div>
+
+    
+             
+          <!-- Custom -->
+          <div *ngSwitchCase="TableHeaderType.Custom" (click)="onApproveChange(col, rowData.id, rowData)">
+            <span [innerHTML]="col.extraData?.customElementHtml"></span>
+          </div>
+    <!-- Approval State -->
+    <span *ngSwitchCase="TableHeaderType.Link">
+      <a
+        class="approved-chip"
+        routerLink="{{
+          col.extraData?.link + rowData[col.field] + '/' + col.extraData?.linkType
+        }}"
+      >
+        {{ col.extraData?.linkName | abpLocalization }}
+      </a>
+    </span>
+         
+                <!-- Link -->
+                <p-inputText
+                  *ngSwitchCase="TableHeaderType.Link"
+                  [(ngModel)]="rowData[col.field]"
+                  type="url"
+                  placeholder="Enter URL"
+                  [required]="col.required"
+                  [disabled]="col.disabled"
+                  [pattern]="'https?://.+'"
+                  (change)="onDataChange(rowData, col.field,col.required)"
+                >
+                </p-inputText>
+                <span *ngSwitchCase="TableHeaderType.Link">
+          
+                  <!-- <a class="approved-chip" [routerLink]="['/', (rowData['parentType'] | ParentType) , rowData['parentId']]">
+  {{ rowData['parentName'] }}
+</a> -->
+<a class="linked-chip" [routerLink]="getRoutePath(rowData['parentType'], rowData['parentId'])">
+  <!-- <i class="fi fi-rr-arrow-left"></i> -->
+  {{ rowData['parentName'] }}
+</a>
+
+
+
+     
+                </span>
+                <!-- Avatar -->
+                <p-fileUpload
+                  *ngSwitchCase="TableHeaderType.Avatar"
+                  customUpload="true"
+                  (uploadHandler)="onAvatarChange($event, col.field,col.required)"
+                  [multiple]="true"
+                  [required]="col.required"
+                  [disabled]="col.disabled"
+                  accept="image/*"
+                  (change)="onDataChange(rowData, col.field,col.required)"
+                >
+                </p-fileUpload>
+
+                <div *ngSwitchCase="TableHeaderType.TextArea">
+                  <p-iconField iconPosition="left" class="spinner-loading">
+                    <p-inputIcon
+                      [styleClass]="{
+                        'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                        'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                      }"
+                    />
+                    <input
+                      type="text"
+                      pInputText
+                      [(ngModel)]="rowData[col.field]"
+                      (click)="op.toggle($event)"
+                      (change)="onDataChange(rowData, col.field,col.required)"
+                    />
+                  </p-iconField>
+
+                  <p-overlayPanel #op  >
+                    <p-iconField iconPosition="left" class="spinner-loading">
+                      <p-inputIcon
+                        [styleClass]="{
+                          'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                          'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field,col.required)
+                        }"
+                      />
+                      <textarea
+                        rows="5"
+                        cols="30"
+                        pInputTextarea
+                        pAutoFocus
+                        [autofocus]="true"
+                        [(ngModel)]="rowData[col.field]"
+                        (change)="onDataChange(rowData, col.field,col.required)"
+                      >
+                      </textarea>
+                    </p-iconField>
+                  </p-overlayPanel>
+                </div>
+
+     <!-- pic-->
+
+     <span *ngSwitchCase="TableHeaderType.Pic">
+      
+      <div class="flex justify-content-center gap-2">
+        <p-image 
+        *ngIf="rowData[col.field]"
+        src="{{backendUrl + rowData[col.field]}}" 
+        alt="Image" 
+        width="40" 
+        [preview]="true" />  
+        <!-- <p-tag
+          *ngIf="rowData[col.field]"
+          (click)="op.toggle($event)"
+          value="{{ '::Show' | abpLocalization }}"
+          [rounded]="true"
+          style="cursor: pointer"
+        ></p-tag> -->
+      </div>
+    </span>
+
+                <div *ngSwitchCase="TableHeaderType.CkEditor">
+                  <p-iconField iconPosition="left" class="spinner-loading">
+                    <p-inputIcon
+                      [styleClass]="{
+                        'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                        'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                      }"
+                    />
+                    <p   [innerHTML]="rowData[col.field]"  (click)="op.toggle($event)"
+                    (change)="onDataChange(rowData, col.field,col.required)"></p>
+
+             
+                  </p-iconField>
+
+                  <p-overlayPanel #op>
+                    <p-iconField iconPosition="left" class="spinner-loading">
+                      <p-inputIcon
+                        [styleClass]="{
+                          'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                          'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                        }"
+                      />
+                  <p-editor [(ngModel)]="rowData[col.field]" [style]="{'height':'320px'}"   (onBlur)="onDataChange(rowData, col.field,col.required)"  ></p-editor>
+                    </p-iconField>
+                  </p-overlayPanel>
+                </div>
+
+
+
+
+                <!-- Default input -->
+
+                <ng-container *ngSwitchDefault>
+                  <div
+                    *ngIf="
+                      col.field === 'paymentId' &&
+                      (rowData['paymentUrl'] || rowData['paymentId']) &&
+                      (rowData['paymentMethod']?.toLowerCase?.() === 'banktransfer');
+                      else defaultTextInput
+                    "
+                  >
+                    <button
+                      class="btn btn-outline-primary btn-sm"
+                      type="button"
+                      (click)="openPaymentProof(rowData, $event)"
+                      title="عرض الحوالة"
+                    >
+                      <i class="pi pi-receipt"></i>
+                    </button>
+                  </div>
+                  <ng-template #defaultTextInput>
+                    <p-iconField iconPosition="left" class="spinner-loading">
+                      <p-inputIcon
+                        [styleClass]="{
+                          'pi pi-spinner pi-spin': isRowLoading(rowData, col.field),
+                          'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
+                        }"
+                      />
+                      <!-- input can't be empty -->
+                      <input
+                        type="text"
+                        pInputText
+                        [(ngModel)]="rowData[col.field]"
+                        [required]="col.required"
+                        [id]="
+                          rowData['lastModificationTime'] === null && col.field === columns[0].field
+                        "
+                        [disabled]="col.disabled || isRowLoading(rowData, col.field)"
+                        (change)="onDataChange(rowData, col.field,col.required)"
+                      />
+                    </p-iconField>
+                  </ng-template>
+                </ng-container>
+              </div>
+            </td>
+
+            <!-- Actions Buttons -->
+            <td *ngIf="actions.length" class="action-cell action" pFrozenColumn>
+              <button
+                *ngIf="(rowData['paymentUrl'] || rowData['paymentId']) && (rowData['paymentMethod']?.toLowerCase?.() === 'banktransfer')"
+                type="button"
+                class="btn btn-outline-primary btn-sm ms-1"
+                (click)="openPaymentProof(rowData, $event)"
+                title="عرض الحوالة"
+              >
+                <i class="pi pi-receipt"></i>
+              </button>
+              <ng-container *ngFor="let action of actions">
+                <button
+                  (click)="onTakeAction(action, rowData)"
+                  type="button"
+                  [title]="action.label! | abpLocalization"
+                  [ngClass]="{
+                   'btn btn-outline-primary': true,
+                  'v-hidden': !((action.visible || action.visible === undefined) &&
+                  rowData[action.state?.['checkingFelid']] === action.state?.['showIf'] ||
+                  action.state === undefined)
+                }"
+                >
+                   <!-- <span *ngIf="expression">{{ action.label! | abpLocalization }}</span> -->
+                  <i [class]="action.iconClass"> </i>
+                </button>
+              </ng-container>
+            
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-container>
+  </div>
+  <p-dialog
+    header="صورة الحوالة"
+    [(visible)]="paymentProofVisible"
+    [modal]="true"
+    [dismissableMask]="true"
+    [style]="{ width: '60vw' }"
+    (onHide)="paymentProofVisible = false"
+  >
+    <div class="text-center" *ngIf="paymentProofUrl; else noProof">
+      <img [src]="paymentProofUrl" alt="صورة الحوالة" class="img-fluid w-100" />
+    </div>
+    <ng-template #noProof>
+      <div class="text-center text-muted">لا توجد صورة حوالة متاحة</div>
+    </ng-template>
+  </p-dialog>
+</div>

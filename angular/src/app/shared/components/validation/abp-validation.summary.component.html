@@ -1,0 +1,12 @@
+<ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
+  <ng-container *ngFor="let validationError of validationErrors">
+    <span
+      *ngIf="!!control.errors[validationError.name]"
+      class="error invalid-feedback"
+      [class.d-block]="!!control.errors[validationError.name]"
+    >
+      <!-- Use async pipe to resolve the observable -->
+      {{ getValidationErrorMessage(validationError) | async }}
+    </span>
+  </ng-container>
+</ng-container>

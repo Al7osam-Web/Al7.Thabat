@@ -1,0 +1,16 @@
+<div class="form-group">
+  <label [for]="label">{{ label | abpLocalization }}</label>
+  <input
+    [type]="type"
+    class="form-control"
+    [id]="id"
+    [placeholder]="placeholder | abpLocalization"
+    [disabled]="disabled"
+    [required]="required"
+    [pattern]="pattern"
+    [min]="min"
+    [max]="max"
+    [(ngModel)]="value"
+    (input)="emitInputTextValue($any($event.target).value)" />
+    
+</div>

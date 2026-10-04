@@ -1,0 +1,1562 @@
+:root {
+  --adfaz-blue: #8065f2;
+  --adfaz-indigo: #6b5eae;
+  --adfaz-pink: #ff679b;
+  --adfaz-red: ##f8285a;
+  --adfaz-orange: #fd7e14;
+  --adfaz-yellow: #f9c45c;
+  --adfaz-green: #6ac75a;
+  --adfaz-teal: #02bc9c;
+  --adfaz-cyan: #67baf1;
+  --adfaz-black: #000;
+  --adfaz-white: #fff;
+  --adfaz-primary: #8065f2;
+  --adfaz-secondary: #783bff;
+  --success: #6ac75a;
+  --adfaz-info: #67baf1;
+  --adfaz-warning: #f9c45c;
+  --adfaz-danger: #f8285a;
+  --adfaz-danger-bg-subtle: #f8285a26;
+  --adfaz-light: #eef2f7;
+  --adfaz-dark: #0d244c;
+  --adfaz-primary-rgb: 70, 93, 255;
+  --adfaz-secondary-rgb: 120, 59, 255;
+  --success-rgb: 106, 199, 90;
+  --adfaz-info-rgb: 103, 186, 241;
+  --adfaz-warning-rgb: 249, 196, 92;
+  --adfaz-danger-rgb: 255, 109, 67;
+  --adfaz-light-rgb: 238, 242, 247;
+
+  --adfaz-border-width: 1px;
+  --adfaz-border-radius: 0.3rem;
+  --adfaz-border-radius-sm: 0.25rem;
+  --adfaz-border-radius-lg: 0.4rem;
+  --adfaz-border-radius-xl: 1rem;
+  --adfaz-border-radius-pill: 50rem;
+  --adfaz-box-shadow: 0px 0px 35px 0px rgba(104, 134, 177, 0.15);
+  --adfaz-box-shadow-sm: 0 0.125rem 0.25rem rgba(var(--adfaz-body-color-rgb), 0.15);
+  --adfaz-box-shadow-lg: 0 0 45px 0 rgba(var(--adfaz-body-color-rgb), 0.2);
+  --adfaz-focus-ring-width: 0;
+  --adfaz-focus-ring-opacity: 0.25;
+  --adfaz-focus-ring-color: rgba(70, 93, 255, 0.25);
+}
+
+.bg-gradient {
+  background-image: var(--adfaz-gradient) !important;
+}
+
+.btn {
+  --adfaz-btn-padding-x: 1.1rem;
+  --adfaz-btn-padding-y: 0.5rem;
+  --adfaz-btn-font-size: 0.8125rem;
+  --adfaz-btn-font-weight: 400;
+  --adfaz-btn-line-height: 1.5;
+  --adfaz-btn-color: var(--adfaz-body-color);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-width: var(--adfaz-border-width);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-border-radius: 0.3rem;
+  --adfaz-btn-hover-border-color: transparent;
+  --adfaz-btn-box-shadow: 0px 2px 6px 0px;
+  --adfaz-btn-disabled-opacity: 0.65;
+  --adfaz-btn-focus-box-shadow: 0 0 0 0 rgba(var(--adfaz-btn-focus-shadow-rgb), 0.5);
+  display: inline-block;
+  padding: var(--adfaz-btn-padding-y) var(--adfaz-btn-padding-x);
+  font-family: var(--adfaz-btn-font-family);
+  font-size: var(--adfaz-btn-font-size);
+  font-weight: var(--adfaz-btn-font-weight);
+  line-height: var(--adfaz-btn-line-height);
+  color: var(--adfaz-btn-color);
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: var(--adfaz-btn-border-width) solid var(--adfaz-btn-border-color);
+  border-radius: var(--adfaz-btn-border-radius);
+  background-color: var(--adfaz-btn-bg);
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
+.btn:hover {
+  color: var(--adfaz-btn-hover-color);
+  background-color: var(--adfaz-btn-hover-bg);
+  border-color: var(--adfaz-btn-hover-border-color);
+}
+
+.btn-check + .btn:hover {
+  color: var(--adfaz-btn-color);
+  background-color: var(--adfaz-btn-bg);
+  border-color: var(--adfaz-btn-border-color);
+}
+
+.btn:focus-visible {
+  color: var(--adfaz-btn-hover-color);
+  background-color: var(--adfaz-btn-hover-bg);
+  border-color: var(--adfaz-btn-hover-border-color);
+  outline: 0;
+  -webkit-box-shadow: var(--adfaz-btn-focus-box-shadow);
+  box-shadow: var(--adfaz-btn-focus-box-shadow);
+}
+
+.btn-check:focus-visible + .btn {
+  border-color: var(--adfaz-btn-hover-border-color);
+  outline: 0;
+  -webkit-box-shadow: var(--adfaz-btn-focus-box-shadow);
+  box-shadow: var(--adfaz-btn-focus-box-shadow);
+}
+
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  color: var(--adfaz-btn-active-color);
+  background-color: var(--adfaz-btn-active-bg);
+  border-color: var(--adfaz-btn-active-border-color);
+}
+
+.btn-check:checked + .btn:focus-visible,
+.btn.active:focus-visible,
+.btn.show:focus-visible,
+.btn:first-child:active:focus-visible,
+:not(.btn-check) + .btn:active:focus-visible {
+  -webkit-box-shadow: var(--adfaz-btn-focus-box-shadow);
+  box-shadow: var(--adfaz-btn-focus-box-shadow);
+}
+
+.btn-check:checked:focus-visible + .btn {
+  -webkit-box-shadow: var(--adfaz-btn-focus-box-shadow);
+  box-shadow: var(--adfaz-btn-focus-box-shadow);
+}
+
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  color: var(--adfaz-btn-disabled-color);
+  pointer-events: none;
+  background-color: var(--adfaz-btn-disabled-bg);
+  border-color: var(--adfaz-btn-disabled-border-color);
+  opacity: var(--adfaz-btn-disabled-opacity);
+}
+
+.btn-primary {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #8065f2;
+  --adfaz-btn-border-color: #8065f2;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #3f1675;
+  --adfaz-btn-hover-border-color: #8065f2;
+  --adfaz-btn-focus-shadow-rgb: 98, 117, 255;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #8065f2;
+  --adfaz-btn-active-border-color: #8065f2;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #8065f2;
+  --adfaz-btn-disabled-border-color: #8065f2;
+}
+
+.btn-secondary {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #783bff;
+  --adfaz-btn-border-color: #783bff;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #6d35e7;
+  --adfaz-btn-hover-border-color: #6f37ec;
+  --adfaz-btn-focus-shadow-rgb: 140, 88, 255;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #6f37ec;
+  --adfaz-btn-active-border-color: #6f37ec;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #783bff;
+  --adfaz-btn-disabled-border-color: #783bff;
+}
+
+.btn-success {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #6ac75a;
+  --adfaz-btn-border-color: #6ac75a;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #60b451;
+  --adfaz-btn-hover-border-color: #62b853;
+  --adfaz-btn-focus-shadow-rgb: 128, 207, 115;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #62b853;
+  --adfaz-btn-active-border-color: #62b853;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #6ac75a;
+  --adfaz-btn-disabled-border-color: #6ac75a;
+}
+
+.btn-info {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #67baf1;
+  --adfaz-btn-border-color: #67baf1;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #5da8da;
+  --adfaz-btn-hover-border-color: #5facdf;
+  --adfaz-btn-focus-shadow-rgb: 126, 196, 243;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #5facdf;
+  --adfaz-btn-active-border-color: #5facdf;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #67baf1;
+  --adfaz-btn-disabled-border-color: #67baf1;
+}
+
+.btn-warning {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #f9c45c;
+  --adfaz-btn-border-color: #f9c45c;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #e1b153;
+  --adfaz-btn-hover-border-color: #e6b555;
+  --adfaz-btn-focus-shadow-rgb: 250, 205, 116;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #e6b555;
+  --adfaz-btn-active-border-color: #e6b555;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #f9c45c;
+  --adfaz-btn-disabled-border-color: #f9c45c;
+}
+
+.btn-danger {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: ##f8285a;
+  --adfaz-btn-border-color: ##f8285a;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: ##f8285a;
+  --adfaz-btn-hover-border-color: ##f8285a;
+  --adfaz-btn-focus-shadow-rgb: 255, 131, 95;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: ##f8285a;
+  --adfaz-btn-active-border-color: ##f8285a;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: ##f8285a;
+  --adfaz-btn-disabled-border-color: ##f8285a;
+}
+
+.btn-light {
+  --adfaz-btn-color: #0d244c;
+  --adfaz-btn-bg: #eef2f7;
+  --adfaz-btn-border-color: #eef2f7;
+  --adfaz-btn-hover-color: #0d244c;
+  --adfaz-btn-hover-bg: #d7dbe0;
+  --adfaz-btn-hover-border-color: #dce0e4;
+  --adfaz-btn-focus-shadow-rgb: 210, 214, 220;
+  --adfaz-btn-active-color: #0d244c;
+  --adfaz-btn-active-bg: #dce0e4;
+  --adfaz-btn-active-border-color: #dce0e4;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #0d244c;
+  --adfaz-btn-disabled-bg: #eef2f7;
+  --adfaz-btn-disabled-border-color: #eef2f7;
+}
+
+.btn-dark {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #0d244c;
+  --adfaz-btn-border-color: #0d244c;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #505862;
+  --adfaz-btn-hover-border-color: #404954;
+  --adfaz-btn-focus-shadow-rgb: 80, 88, 98;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #505862;
+  --adfaz-btn-active-border-color: #464e59;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #0d244c;
+  --adfaz-btn-disabled-border-color: #0d244c;
+}
+
+.btn-outline-primary {
+  --adfaz-btn-color: #8065f2;
+  --adfaz-btn-border-color: #8065f2;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #8065f2;
+  --adfaz-btn-hover-border-color: #8065f2;
+  --adfaz-btn-focus-shadow-rgb: 70, 93, 255;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #8065f2;
+  --adfaz-btn-active-border-color: #8065f2;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #8065f2;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #8065f2;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-secondary {
+  --adfaz-btn-color: #783bff;
+  --adfaz-btn-border-color: #783bff;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #783bff;
+  --adfaz-btn-hover-border-color: #783bff;
+  --adfaz-btn-focus-shadow-rgb: 120, 59, 255;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #783bff;
+  --adfaz-btn-active-border-color: #783bff;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #783bff;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #783bff;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-success {
+  --adfaz-btn-color: #6ac75a;
+  --adfaz-btn-border-color: #6ac75a;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #6ac75a;
+  --adfaz-btn-hover-border-color: #6ac75a;
+  --adfaz-btn-focus-shadow-rgb: 106, 199, 90;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #6ac75a;
+  --adfaz-btn-active-border-color: #6ac75a;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #6ac75a;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #6ac75a;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-info {
+  --adfaz-btn-color: #67baf1;
+  --adfaz-btn-border-color: #67baf1;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #67baf1;
+  --adfaz-btn-hover-border-color: #67baf1;
+  --adfaz-btn-focus-shadow-rgb: 103, 186, 241;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #67baf1;
+  --adfaz-btn-active-border-color: #67baf1;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #67baf1;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #67baf1;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-warning {
+  --adfaz-btn-color: #f9c45c;
+  --adfaz-btn-border-color: #f9c45c;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #f9c45c;
+  --adfaz-btn-hover-border-color: #f9c45c;
+  --adfaz-btn-focus-shadow-rgb: 249, 196, 92;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #f9c45c;
+  --adfaz-btn-active-border-color: #f9c45c;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #f9c45c;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #f9c45c;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-danger {
+  --adfaz-btn-color: ##f8285a;
+  --adfaz-btn-border-color: ##f8285a;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: ##f8285a;
+  --adfaz-btn-hover-border-color: ##f8285a;
+  --adfaz-btn-focus-shadow-rgb: 255, 109, 67;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: ##f8285a;
+  --adfaz-btn-active-border-color: ##f8285a;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: ##f8285a;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: ##f8285a;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-light {
+  --adfaz-btn-color: #eef2f7;
+  --adfaz-btn-border-color: #eef2f7;
+  --adfaz-btn-hover-color: #0d244c;
+  --adfaz-btn-hover-bg: #eef2f7;
+  --adfaz-btn-hover-border-color: #eef2f7;
+  --adfaz-btn-focus-shadow-rgb: 238, 242, 247;
+  --adfaz-btn-active-color: #0d244c;
+  --adfaz-btn-active-bg: #eef2f7;
+  --adfaz-btn-active-border-color: #eef2f7;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #eef2f7;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #eef2f7;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-dark {
+  --adfaz-btn-color: #0d244c;
+  --adfaz-btn-border-color: #0d244c;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #0d244c;
+  --adfaz-btn-hover-border-color: #0d244c;
+  --adfaz-btn-focus-shadow-rgb: 49, 58, 70;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #0d244c;
+  --adfaz-btn-active-border-color: #0d244c;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #0d244c;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #0d244c;
+  --adfaz-gradient: none;
+}
+
+.btn-link {
+  --adfaz-btn-font-weight: 400;
+  --adfaz-btn-color: var(--adfaz-link-color);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-link-hover-color);
+  --adfaz-btn-hover-border-color: transparent;
+  --adfaz-btn-active-color: var(--adfaz-link-hover-color);
+  --adfaz-btn-active-border-color: transparent;
+  --adfaz-btn-disabled-color: #8a969c;
+  --adfaz-btn-disabled-border-color: transparent;
+  --adfaz-btn-box-shadow: 0 0 0 #000;
+  --adfaz-btn-focus-shadow-rgb: 98, 117, 255;
+  text-decoration: none;
+}
+
+.btn-link:focus-visible {
+  color: var(--adfaz-btn-color);
+}
+
+.btn-link:hover {
+  color: var(--adfaz-btn-hover-color);
+}
+
+.btn-group-lg > .btn,
+.btn-lg {
+  --adfaz-btn-padding-y: 0.65rem;
+  --adfaz-btn-padding-x: 1.5rem;
+  --adfaz-btn-font-size: 1.015625rem;
+  --adfaz-btn-border-radius: 0.4rem;
+}
+
+.btn-group-sm > .btn,
+.btn-sm {
+  --adfaz-btn-padding-y: 0.3rem;
+  --adfaz-btn-padding-x: 0.8rem;
+  --adfaz-btn-font-size: 0.7875rem;
+  --adfaz-btn-border-radius: 0.25rem;
+}
+
+.btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.btn-icon {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: calc(1rem + 1.5em + 2px);
+  width: calc(1rem + 1.5em + 2px);
+  padding: 0;
+}
+
+.btn-icon :is(i, svg, img) {
+  vertical-align: middle;
+}
+
+.btn-group-sm > .btn-icon.btn,
+.btn-icon.btn-sm {
+  height: calc(0.6rem + 1.5em + 2px);
+  width: calc(0.6rem + 1.5em + 2px);
+}
+
+.btn-group-lg > .btn-icon.btn,
+.btn-icon.btn-lg {
+  height: calc(1.3rem + 1.5em + 2px);
+  width: calc(1.3rem + 1.5em + 2px);
+}
+
+.btn-soft-primary {
+  --adfaz-btn-color: var(--adfaz-primary);
+  --adfaz-btn-bg: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-primary);
+  --adfaz-btn-hover-border-color: var(--adfaz-primary);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-primary);
+  --adfaz-btn-active-border-color: var(--adfaz-primary);
+  --adfaz-btn-disabled-color: var(--adfaz-primary);
+  --adfaz-btn-disabled-bg: var(--adfaz-primary);
+  --adfaz-btn-disabled-border-color: var(--adfaz-primary);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-primary)-rgb, 0.5);
+}
+
+.btn-ghost-primary {
+  --adfaz-btn-color: var(--adfaz-primary);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-primary);
+  --adfaz-btn-hover-bg: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-primary);
+  --adfaz-btn-active-bg: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-primary)-rgb, 0.5);
+}
+
+.btn-soft-secondary {
+  --adfaz-btn-color: var(--adfaz-secondary);
+  --adfaz-btn-bg: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-secondary);
+  --adfaz-btn-hover-border-color: var(--adfaz-secondary);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-secondary);
+  --adfaz-btn-active-border-color: var(--adfaz-secondary);
+  --adfaz-btn-disabled-color: var(--adfaz-secondary);
+  --adfaz-btn-disabled-bg: var(--adfaz-secondary);
+  --adfaz-btn-disabled-border-color: var(--adfaz-secondary);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-secondary)-rgb, 0.5);
+}
+
+.btn-ghost-secondary {
+  --adfaz-btn-color: var(--adfaz-secondary);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-secondary);
+  --adfaz-btn-hover-bg: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-secondary);
+  --adfaz-btn-active-bg: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-secondary)-rgb, 0.5);
+}
+
+.btn-soft-success {
+  --adfaz-btn-color: var(--success);
+  --adfaz-btn-bg: var(--success-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--success);
+  --adfaz-btn-hover-border-color: var(--success);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--success);
+  --adfaz-btn-active-border-color: var(--success);
+  --adfaz-btn-disabled-color: var(--success);
+  --adfaz-btn-disabled-bg: var(--success);
+  --adfaz-btn-disabled-border-color: var(--success);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--success)-rgb, 0.5);
+}
+
+.btn-ghost-success {
+  --adfaz-btn-color: var(--success);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--success);
+  --adfaz-btn-hover-bg: var(--success-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--success-bg-subtle);
+  --adfaz-btn-active-color: var(--success);
+  --adfaz-btn-active-bg: var(--success-bg-subtle);
+  --adfaz-btn-active-border-color: var(--success-bg-subtle);
+  --adfaz-btn-disabled-color: var(--success-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--success-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--success-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--success)-rgb, 0.5);
+}
+
+.btn-soft-info {
+  --adfaz-btn-color: var(--adfaz-info);
+  --adfaz-btn-bg: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-info);
+  --adfaz-btn-hover-border-color: var(--adfaz-info);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-info);
+  --adfaz-btn-active-border-color: var(--adfaz-info);
+  --adfaz-btn-disabled-color: var(--adfaz-info);
+  --adfaz-btn-disabled-bg: var(--adfaz-info);
+  --adfaz-btn-disabled-border-color: var(--adfaz-info);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-info)-rgb, 0.5);
+}
+
+.btn-ghost-info {
+  --adfaz-btn-color: var(--adfaz-info);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-info);
+  --adfaz-btn-hover-bg: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-info);
+  --adfaz-btn-active-bg: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-info)-rgb, 0.5);
+}
+
+.btn-soft-warning {
+  --adfaz-btn-color: var(--adfaz-warning);
+  --adfaz-btn-bg: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-warning);
+  --adfaz-btn-hover-border-color: var(--adfaz-warning);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-warning);
+  --adfaz-btn-active-border-color: var(--adfaz-warning);
+  --adfaz-btn-disabled-color: var(--adfaz-warning);
+  --adfaz-btn-disabled-bg: var(--adfaz-warning);
+  --adfaz-btn-disabled-border-color: var(--adfaz-warning);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-warning)-rgb, 0.5);
+}
+
+.btn-ghost-warning {
+  --adfaz-btn-color: var(--adfaz-warning);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-warning);
+  --adfaz-btn-hover-bg: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-warning);
+  --adfaz-btn-active-bg: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-warning)-rgb, 0.5);
+}
+
+.btn-soft-danger {
+  --adfaz-btn-color: var(--adfaz-danger);
+  --adfaz-btn-bg: #f8285a2b;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-danger);
+  --adfaz-btn-hover-border-color: var(--adfaz-danger);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-danger);
+  --adfaz-btn-active-border-color: var(--adfaz-danger);
+  --adfaz-btn-disabled-color: var(--adfaz-danger);
+  --adfaz-btn-disabled-bg: var(--adfaz-danger);
+  --adfaz-btn-disabled-border-color: var(--adfaz-danger);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-danger)-rgb, 0.5);
+}
+
+.btn-ghost-danger {
+  --adfaz-btn-color: var(--adfaz-danger);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-danger);
+  --adfaz-btn-hover-bg: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-danger);
+  --adfaz-btn-active-bg: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-danger)-rgb, 0.5);
+}
+
+.btn-soft-light {
+  --adfaz-btn-color: var(--adfaz-light);
+  --adfaz-btn-bg: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-light);
+  --adfaz-btn-hover-border-color: var(--adfaz-light);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-light);
+  --adfaz-btn-active-border-color: var(--adfaz-light);
+  --adfaz-btn-disabled-color: var(--adfaz-light);
+  --adfaz-btn-disabled-bg: var(--adfaz-light);
+  --adfaz-btn-disabled-border-color: var(--adfaz-light);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-light)-rgb, 0.5);
+}
+
+.btn-ghost-light {
+  --adfaz-btn-color: var(--adfaz-light);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-light);
+  --adfaz-btn-hover-bg: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-light);
+  --adfaz-btn-active-bg: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-light)-rgb, 0.5);
+}
+
+.btn-soft-dark {
+  --adfaz-btn-color: var(--adfaz-dark);
+  --adfaz-btn-bg: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-dark);
+  --adfaz-btn-hover-border-color: var(--adfaz-dark);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-dark);
+  --adfaz-btn-active-border-color: var(--adfaz-dark);
+  --adfaz-btn-disabled-color: var(--adfaz-dark);
+  --adfaz-btn-disabled-bg: var(--adfaz-dark);
+  --adfaz-btn-disabled-border-color: var(--adfaz-dark);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-dark)-rgb, 0.5);
+}
+
+.btn-ghost-dark {
+  --adfaz-btn-color: var(--adfaz-dark);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-dark);
+  --adfaz-btn-hover-bg: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-dark);
+  --adfaz-btn-active-bg: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-dark)-rgb, 0.5);
+}
+
+.btn-ghost-light {
+  --adfaz-btn-color: var(--adfaz-secondary-color);
+  --adfaz-btn-hover-color: var(--adfaz-dark);
+  --adfaz-btn-hover-bg: var(--adfaz-light);
+}
+
+.btn-outline-white {
+  --adfaz-btn-color: var(--adfaz-dark);
+  --adfaz-btn-border-color: var(--adfaz-light);
+  --adfaz-btn-hover-color: var(--adfaz-dark);
+  --adfaz-btn-hover-bg: var(--adfaz-light);
+  --adfaz-btn-hover-border-color: var(--adfaz-light);
+  --adfaz-btn-active-color: var(--adfaz-dark);
+  --adfaz-btn-active-bg: var(--adfaz-light);
+  --adfaz-btn-active-border-color: var(--adfaz-light);
+  --adfaz-btn-disabled-color: var(--adfaz-dark);
+  --adfaz-btn-disabled-bg: var(--adfaz-light);
+  --adfaz-btn-disabled-border-color: var(--adfaz-light);
+}
+
+[data-bs-theme='dark'] .btn-secondary {
+  -webkit-box-shadow: var(--adfaz-btn-box-shadow) rgba(var(--adfaz-light-rgb), 0.5);
+  box-shadow: var(--adfaz-btn-box-shadow) rgba(var(--adfaz-light-rgb), 0.5);
+}
+
+// -------------------------------buttuns-------------------------------
+
+.rounded-pill {
+  border-radius: var(--adfaz-border-radius-pill) !important;
+}
+
+.btn {
+  --adfaz-btn-padding-x: 1.1rem;
+  --adfaz-btn-padding-y: 0.5rem;
+  --adfaz-btn-font-size: 0.8125rem;
+  --adfaz-btn-font-weight: 400;
+  --adfaz-btn-line-height: 1.5;
+  --adfaz-btn-color: var(--adfaz-body-color);
+  --adfaz-btn-bg: transparent;
+
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-border-radius: 0.3rem;
+  --adfaz-btn-hover-border-color: transparent;
+  --adfaz-btn-box-shadow: 0px 2px 6px 0px;
+  --adfaz-btn-disabled-opacity: 0.65;
+  --adfaz-btn-focus-box-shadow: 0 0 0 0 rgba(var(--adfaz-btn-focus-shadow-rgb), 0.5);
+  display: inline-block;
+  font-weight: 600;
+  color: var(--adfaz-btn-color);
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: var(--adfaz-btn-border-width) solid var(--adfaz-btn-border-color);
+  border-radius: var(--adfaz-btn-border-radius);
+  background-color: var(--adfaz-btn-bg);
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+  gap: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
+.btn:hover {
+  color: var(--adfaz-btn-hover-color);
+  background-color: var(--adfaz-btn-hover-bg);
+  border-color: var(--adfaz-btn-hover-border-color);
+}
+
+.btn-check + .btn:hover {
+  color: var(--adfaz-btn-color);
+  background-color: var(--adfaz-btn-bg);
+  border-color: var(--adfaz-btn-border-color);
+}
+
+.btn:focus-visible {
+  color: var(--adfaz-btn-hover-color);
+  background-color: var(--adfaz-btn-hover-bg);
+  border-color: var(--adfaz-btn-hover-border-color);
+  outline: 0;
+  -webkit-box-shadow: var(--adfaz-btn-focus-box-shadow);
+  box-shadow: var(--adfaz-btn-focus-box-shadow);
+}
+
+.btn-check:focus-visible + .btn {
+  border-color: var(--adfaz-btn-hover-border-color);
+  outline: 0;
+  -webkit-box-shadow: var(--adfaz-btn-focus-box-shadow);
+  box-shadow: var(--adfaz-btn-focus-box-shadow);
+}
+
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  color: var(--adfaz-btn-active-color);
+  background-color: var(--adfaz-btn-active-bg);
+  border-color: var(--adfaz-btn-active-border-color);
+}
+
+.btn-check:checked + .btn:focus-visible,
+.btn.active:focus-visible,
+.btn.show:focus-visible,
+.btn:first-child:active:focus-visible,
+:not(.btn-check) + .btn:active:focus-visible {
+  -webkit-box-shadow: var(--adfaz-btn-focus-box-shadow);
+  box-shadow: var(--adfaz-btn-focus-box-shadow);
+}
+
+.btn-check:checked:focus-visible + .btn {
+  -webkit-box-shadow: var(--adfaz-btn-focus-box-shadow);
+  box-shadow: var(--adfaz-btn-focus-box-shadow);
+}
+
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  color: var(--adfaz-btn-disabled-color);
+  pointer-events: none;
+  background-color: var(--adfaz-btn-disabled-bg);
+  border-color: var(--adfaz-btn-disabled-border-color);
+  opacity: var(--adfaz-btn-disabled-opacity);
+}
+
+.btn-primary {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #8065f2;
+  --adfaz-btn-border-color: #8065f2;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #3f1675;
+  --adfaz-btn-hover-border-color: #8065f2;
+  --adfaz-btn-focus-shadow-rgb: 98, 117, 255;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #8065f2;
+  --adfaz-btn-active-border-color: #8065f2;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #8065f2;
+  --adfaz-btn-disabled-border-color: #8065f2;
+}
+
+.btn-secondary {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #783bff;
+  --adfaz-btn-border-color: #783bff;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #6d35e7;
+  --adfaz-btn-hover-border-color: #6f37ec;
+  --adfaz-btn-focus-shadow-rgb: 140, 88, 255;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #6f37ec;
+  --adfaz-btn-active-border-color: #6f37ec;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #783bff;
+  --adfaz-btn-disabled-border-color: #783bff;
+}
+
+.btn-success {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #6ac75a;
+  --adfaz-btn-border-color: #6ac75a;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #60b451;
+  --adfaz-btn-hover-border-color: #62b853;
+  --adfaz-btn-focus-shadow-rgb: 128, 207, 115;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #62b853;
+  --adfaz-btn-active-border-color: #62b853;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #6ac75a;
+  --adfaz-btn-disabled-border-color: #6ac75a;
+}
+
+.btn-info {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #67baf1;
+  --adfaz-btn-border-color: #67baf1;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #5da8da;
+  --adfaz-btn-hover-border-color: #5facdf;
+  --adfaz-btn-focus-shadow-rgb: 126, 196, 243;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #5facdf;
+  --adfaz-btn-active-border-color: #5facdf;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #67baf1;
+  --adfaz-btn-disabled-border-color: #67baf1;
+}
+
+.btn-warning {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #f9c45c;
+  --adfaz-btn-border-color: #f9c45c;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #e1b153;
+  --adfaz-btn-hover-border-color: #e6b555;
+  --adfaz-btn-focus-shadow-rgb: 250, 205, 116;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #e6b555;
+  --adfaz-btn-active-border-color: #e6b555;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #f9c45c;
+  --adfaz-btn-disabled-border-color: #f9c45c;
+}
+
+.btn-danger {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #f8285a;
+  --adfaz-btn-border-color: #f8285a;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #db1c4a;
+  --adfaz-btn-hover-border-color: #db1c4a;
+  --adfaz-btn-focus-shadow-rgb: 255, 131, 95;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #db1c4a;
+  --adfaz-btn-active-border-color: #db1c4a;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #f8285a;
+  --adfaz-btn-disabled-border-color: #f8285a;
+}
+
+.btn-light {
+  --adfaz-btn-color: #0d244c;
+  --adfaz-btn-bg: #eef2f7;
+  --adfaz-btn-border-color: #eef2f7;
+  --adfaz-btn-hover-color: #0d244c;
+  --adfaz-btn-hover-bg: #d7dbe0;
+  --adfaz-btn-hover-border-color: #dce0e4;
+  --adfaz-btn-focus-shadow-rgb: 210, 214, 220;
+  --adfaz-btn-active-color: #0d244c;
+  --adfaz-btn-active-bg: #dce0e4;
+  --adfaz-btn-active-border-color: #dce0e4;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #0d244c;
+  --adfaz-btn-disabled-bg: #eef2f7;
+  --adfaz-btn-disabled-border-color: #eef2f7;
+}
+
+.btn-dark {
+  --adfaz-btn-color: #fff;
+  --adfaz-btn-bg: #0d244c;
+  --adfaz-btn-border-color: #0d244c;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #505862;
+  --adfaz-btn-hover-border-color: #404954;
+  --adfaz-btn-focus-shadow-rgb: 80, 88, 98;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #505862;
+  --adfaz-btn-active-border-color: #464e59;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #fff;
+  --adfaz-btn-disabled-bg: #0d244c;
+  --adfaz-btn-disabled-border-color: #0d244c;
+}
+
+.btn-outline-primary {
+  --adfaz-btn-color: #8065f2;
+  --adfaz-btn-border-color: #8065f2;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #8065f2;
+  --adfaz-btn-hover-border-color: #8065f2;
+  --adfaz-btn-focus-shadow-rgb: 70, 93, 255;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #8065f2;
+  --adfaz-btn-active-border-color: #8065f2;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #8065f2;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #8065f2;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-secondary {
+  --adfaz-btn-color: #783bff;
+  --adfaz-btn-border-color: #783bff;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #783bff;
+  --adfaz-btn-hover-border-color: #783bff;
+  --adfaz-btn-focus-shadow-rgb: 120, 59, 255;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #783bff;
+  --adfaz-btn-active-border-color: #783bff;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #783bff;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #783bff;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-success {
+  --adfaz-btn-color: #6ac75a;
+  --adfaz-btn-border-color: #6ac75a;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #6ac75a;
+  --adfaz-btn-hover-border-color: #6ac75a;
+  --adfaz-btn-focus-shadow-rgb: 106, 199, 90;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #6ac75a;
+  --adfaz-btn-active-border-color: #6ac75a;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #6ac75a;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #6ac75a;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-info {
+  --adfaz-btn-color: #67baf1;
+  --adfaz-btn-border-color: #67baf1;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #67baf1;
+  --adfaz-btn-hover-border-color: #67baf1;
+  --adfaz-btn-focus-shadow-rgb: 103, 186, 241;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #67baf1;
+  --adfaz-btn-active-border-color: #67baf1;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #67baf1;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #67baf1;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-warning {
+  --adfaz-btn-color: #f9c45c;
+  --adfaz-btn-border-color: #f9c45c;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #f9c45c;
+  --adfaz-btn-hover-border-color: #f9c45c;
+  --adfaz-btn-focus-shadow-rgb: 249, 196, 92;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #f9c45c;
+  --adfaz-btn-active-border-color: #f9c45c;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #f9c45c;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #f9c45c;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-danger {
+  --adfaz-btn-color: #f8285a;
+  --adfaz-btn-border-color: #f8285a;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #f8285a;
+  --adfaz-btn-hover-border-color: #f8285a;
+  --adfaz-btn-focus-shadow-rgb: 255, 109, 67;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #f8285a;
+  --adfaz-btn-active-border-color: #f8285a;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #f8285a;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #f8285a;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-light {
+  --adfaz-btn-color: #eef2f7;
+  --adfaz-btn-border-color: #eef2f7;
+  --adfaz-btn-hover-color: #0d244c;
+  --adfaz-btn-hover-bg: #eef2f7;
+  --adfaz-btn-hover-border-color: #eef2f7;
+  --adfaz-btn-focus-shadow-rgb: 238, 242, 247;
+  --adfaz-btn-active-color: #0d244c;
+  --adfaz-btn-active-bg: #eef2f7;
+  --adfaz-btn-active-border-color: #eef2f7;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #eef2f7;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #eef2f7;
+  --adfaz-gradient: none;
+}
+
+.btn-outline-dark {
+  --adfaz-btn-color: #0d244c;
+  --adfaz-btn-border-color: #0d244c;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: #0d244c;
+  --adfaz-btn-hover-border-color: #0d244c;
+  --adfaz-btn-focus-shadow-rgb: 49, 58, 70;
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: #0d244c;
+  --adfaz-btn-active-border-color: #0d244c;
+  --adfaz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --adfaz-btn-disabled-color: #0d244c;
+  --adfaz-btn-disabled-bg: transparent;
+  --adfaz-btn-disabled-border-color: #0d244c;
+  --adfaz-gradient: none;
+}
+
+.btn-link {
+  --adfaz-btn-font-weight: 400;
+  --adfaz-btn-color: var(--adfaz-link-color);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-link-hover-color);
+  --adfaz-btn-hover-border-color: transparent;
+  --adfaz-btn-active-color: var(--adfaz-link-hover-color);
+  --adfaz-btn-active-border-color: transparent;
+  --adfaz-btn-disabled-color: #8a969c;
+  --adfaz-btn-disabled-border-color: transparent;
+  --adfaz-btn-box-shadow: 0 0 0 #000;
+  --adfaz-btn-focus-shadow-rgb: 98, 117, 255;
+  text-decoration: none;
+}
+
+.btn-link:focus-visible {
+  color: var(--adfaz-btn-color);
+}
+
+.btn-link:hover {
+  color: var(--adfaz-btn-hover-color);
+}
+
+.btn-group-lg > .btn,
+.btn-lg {
+  --adfaz-btn-padding-y: 0.65rem;
+  --adfaz-btn-padding-x: 1.5rem;
+  --adfaz-btn-font-size: 1.015625rem;
+  --adfaz-btn-border-radius: 0.4rem;
+}
+
+.btn-group-sm > .btn,
+.btn-sm {
+  --adfaz-btn-padding-y: 0.3rem;
+  --adfaz-btn-padding-x: 0.8rem;
+  --adfaz-btn-font-size: 0.7875rem;
+  --adfaz-btn-border-radius: 0.25rem;
+}
+
+.btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.btn-icon {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: calc(1rem + 1.5em + 2px);
+  width: calc(1rem + 1.5em + 2px);
+  padding: 0;
+}
+
+.btn-icon :is(i, svg, img) {
+  vertical-align: middle;
+}
+
+.btn-group-sm > .btn-icon.btn,
+.btn-icon.btn-sm {
+  height: calc(0.6rem + 1.5em + 2px);
+  width: calc(0.6rem + 1.5em + 2px);
+}
+
+.btn-group-lg > .btn-icon.btn,
+.btn-icon.btn-lg {
+  height: calc(1.3rem + 1.5em + 2px);
+  width: calc(1.3rem + 1.5em + 2px);
+}
+
+.btn-soft-primary {
+  --adfaz-btn-color: var(--adfaz-primary);
+  --adfaz-btn-bg: var(--adfaz-primary-opacity);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-primary);
+  --adfaz-btn-hover-border-color: var(--adfaz-primary);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-primary);
+  --adfaz-btn-active-border-color: var(--adfaz-primary);
+  --adfaz-btn-disabled-color: var(--adfaz-primary);
+  --adfaz-btn-disabled-bg: var(--adfaz-primary);
+  --adfaz-btn-disabled-border-color: var(--adfaz-primary);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-primary)-rgb, 0.5);
+}
+
+.btn-ghost-primary {
+  --adfaz-btn-color: var(--adfaz-primary);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-primary);
+  --adfaz-btn-hover-bg: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-primary);
+  --adfaz-btn-active-bg: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-primary-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-primary)-rgb, 0.5);
+}
+
+.btn-soft-secondary {
+  --adfaz-btn-color: var(--adfaz-secondary);
+  --adfaz-btn-bg: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-secondary);
+  --adfaz-btn-hover-border-color: var(--adfaz-secondary);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-secondary);
+  --adfaz-btn-active-border-color: var(--adfaz-secondary);
+  --adfaz-btn-disabled-color: var(--adfaz-secondary);
+  --adfaz-btn-disabled-bg: var(--adfaz-secondary);
+  --adfaz-btn-disabled-border-color: var(--adfaz-secondary);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-secondary)-rgb, 0.5);
+}
+
+.btn-ghost-secondary {
+  --adfaz-btn-color: var(--adfaz-secondary);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-secondary);
+  --adfaz-btn-hover-bg: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-secondary);
+  --adfaz-btn-active-bg: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-secondary-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-secondary)-rgb, 0.5);
+}
+
+.btn-soft-success {
+  --adfaz-btn-color: var(--success);
+  --adfaz-btn-bg: #6ac75a21;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--success);
+  --adfaz-btn-hover-border-color: var(--success);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--success);
+  --adfaz-btn-active-border-color: var(--success);
+  --adfaz-btn-disabled-color: var(--success);
+  --adfaz-btn-disabled-bg: var(--success);
+  --adfaz-btn-disabled-border-color: var(--success);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--success)-rgb, 0.5);
+}
+
+.btn-ghost-success {
+  --adfaz-btn-color: var(--success);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--success);
+  --adfaz-btn-hover-bg: var(--success-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--success-bg-subtle);
+  --adfaz-btn-active-color: var(--success);
+  --adfaz-btn-active-bg: var(--success-bg-subtle);
+  --adfaz-btn-active-border-color: var(--success-bg-subtle);
+  --adfaz-btn-disabled-color: var(--success-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--success-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--success-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--success)-rgb, 0.5);
+}
+
+.btn-soft-info {
+  --adfaz-btn-color: var(--adfaz-info);
+  --adfaz-btn-bg: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-info);
+  --adfaz-btn-hover-border-color: var(--adfaz-info);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-info);
+  --adfaz-btn-active-border-color: var(--adfaz-info);
+  --adfaz-btn-disabled-color: var(--adfaz-info);
+  --adfaz-btn-disabled-bg: var(--adfaz-info);
+  --adfaz-btn-disabled-border-color: var(--adfaz-info);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-info)-rgb, 0.5);
+}
+
+.btn-ghost-info {
+  --adfaz-btn-color: var(--adfaz-info);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-info);
+  --adfaz-btn-hover-bg: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-info);
+  --adfaz-btn-active-bg: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-info-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-info)-rgb, 0.5);
+}
+
+.btn-soft-warning {
+  --adfaz-btn-color: var(--adfaz-warning);
+  --adfaz-btn-bg: #f9c45c36;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-warning);
+  --adfaz-btn-hover-border-color: var(--adfaz-warning);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-warning);
+  --adfaz-btn-active-border-color: var(--adfaz-warning);
+  --adfaz-btn-disabled-color: var(--adfaz-warning);
+  --adfaz-btn-disabled-bg: var(--adfaz-warning);
+  --adfaz-btn-disabled-border-color: var(--adfaz-warning);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-warning)-rgb, 0.5);
+}
+
+.btn-ghost-warning {
+  --adfaz-btn-color: var(--adfaz-warning);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-warning);
+  --adfaz-btn-hover-bg: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-warning);
+  --adfaz-btn-active-bg: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-warning-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-warning)-rgb, 0.5);
+}
+
+.btn-soft-danger {
+  --adfaz-btn-color: var(--adfaz-danger);
+  --adfaz-btn-bg: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-danger);
+  --adfaz-btn-hover-border-color: var(--adfaz-danger);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-danger);
+  --adfaz-btn-active-border-color: var(--adfaz-danger);
+  --adfaz-btn-disabled-color: var(--adfaz-danger);
+  --adfaz-btn-disabled-bg: var(--adfaz-danger);
+  --adfaz-btn-disabled-border-color: var(--adfaz-danger);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-danger)-rgb, 0.5);
+}
+
+.btn-ghost-danger {
+  --adfaz-btn-color: var(--adfaz-danger);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-danger);
+  --adfaz-btn-hover-bg: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-danger);
+  --adfaz-btn-active-bg: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-danger-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-danger)-rgb, 0.5);
+}
+
+.btn-soft-light {
+  --adfaz-btn-color: var(--adfaz-light);
+  --adfaz-btn-bg: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-light);
+  --adfaz-btn-hover-border-color: var(--adfaz-light);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-light);
+  --adfaz-btn-active-border-color: var(--adfaz-light);
+  --adfaz-btn-disabled-color: var(--adfaz-light);
+  --adfaz-btn-disabled-bg: var(--adfaz-light);
+  --adfaz-btn-disabled-border-color: var(--adfaz-light);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-light)-rgb, 0.5);
+}
+
+.btn-ghost-light {
+  --adfaz-btn-color: var(--adfaz-light);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-light);
+  --adfaz-btn-hover-bg: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-light);
+  --adfaz-btn-active-bg: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-light-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-light)-rgb, 0.5);
+}
+
+.btn-soft-dark {
+  --adfaz-btn-color: var(--adfaz-dark);
+  --adfaz-btn-bg: #e5eaef;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: #fff;
+  --adfaz-btn-hover-bg: var(--adfaz-dark);
+  --adfaz-btn-hover-border-color: var(--adfaz-dark);
+  --adfaz-btn-active-color: #fff;
+  --adfaz-btn-active-bg: var(--adfaz-dark);
+  --adfaz-btn-active-border-color: var(--adfaz-dark);
+  --adfaz-btn-disabled-color: var(--adfaz-dark);
+  --adfaz-btn-disabled-bg: var(--adfaz-dark);
+  --adfaz-btn-disabled-border-color: var(--adfaz-dark);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-dark)-rgb, 0.5);
+}
+
+.btn-ghost-dark {
+  --adfaz-btn-color: var(--adfaz-dark);
+  --adfaz-btn-bg: transparent;
+  --adfaz-btn-border-color: transparent;
+  --adfaz-btn-hover-color: var(--adfaz-dark);
+  --adfaz-btn-hover-bg: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-hover-border-color: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-active-color: var(--adfaz-dark);
+  --adfaz-btn-active-bg: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-active-border-color: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-disabled-color: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-disabled-bg: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-disabled-border-color: var(--adfaz-dark-bg-subtle);
+  --adfaz-btn-focus-shadow-rgb: 0 0 0 $btn-focus-width rgba(var(--adfaz-dark)-rgb, 0.5);
+}
+
+.btn-ghost-light {
+  --adfaz-btn-color: var(--adfaz-secondary-color);
+  --adfaz-btn-hover-color: var(--adfaz-dark);
+  --adfaz-btn-hover-bg: var(--adfaz-light);
+}
+
+.btn-outline-white {
+  --adfaz-btn-color: var(--adfaz-dark);
+  --adfaz-btn-border-color: var(--adfaz-light);
+  --adfaz-btn-hover-color: var(--adfaz-dark);
+  --adfaz-btn-hover-bg: var(--adfaz-light);
+  --adfaz-btn-hover-border-color: var(--adfaz-light);
+  --adfaz-btn-active-color: var(--adfaz-dark);
+  --adfaz-btn-active-bg: var(--adfaz-light);
+  --adfaz-btn-active-border-color: var(--adfaz-light);
+  --adfaz-btn-disabled-color: var(--adfaz-dark);
+  --adfaz-btn-disabled-bg: var(--adfaz-light);
+  --adfaz-btn-disabled-border-color: var(--adfaz-light);
+}
+
+.bg-gradient {
+  background-image: var(--adfaz-gradient) !important;
+}
+
+.btn-group-lg > .btn,
+.btn-lg {
+  --adfaz-btn-padding-y: 0.65rem;
+  --adfaz-btn-padding-x: 1.5rem;
+  --adfaz-btn-font-size: 1.015625rem;
+  --adfaz-btn-border-radius: 0.4rem;
+}
+
+.btn-group-sm > .btn,
+.btn-sm {
+  --adfaz-btn-padding-y: 0.3rem;
+  --adfaz-btn-padding-x: 0.8rem;
+  --adfaz-btn-font-size: 0.7875rem;
+  --adfaz-btn-border-radius: 0.25rem;
+}

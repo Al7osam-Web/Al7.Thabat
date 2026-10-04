@@ -1,0 +1,3 @@
+@mixin main-gradient-degree($degree, $color1, $color2) {
+  background-image: linear-gradient($degree, $color1, $color2);
+}

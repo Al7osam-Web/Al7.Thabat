@@ -1,0 +1,127 @@
+@import '../scss/root.scss';
+
+// Primary colors
+$primary-main: var(--primary-main);
+$primary-dark: var(--primary-dark);
+$primary-light: var(--primary-light);
+$primary-opacity: var(--adfaz-primary-opacity);
+$primary-very-light: var(--adfaz-primary-very-light);
+// Secondary colors
+$secondary-main: var(--adfaz-secondary-main);
+$secondary-dark: var(--adfaz-secondary-dark);
+$secondary-light: var(--secondary-light);
+
+// thired colors
+$thired-main: var(--adfaz-thired-main);
+
+// Neutral colors
+$white: var(--adfaz-white);
+$grey: var(--grey);
+$grey-main: var(--grey-main);
+$grey-light: var(--grey-light);
+$black: var(--adfaz-black);
+
+// Status colors
+$success: var(--success);
+$error: var(--error);
+$error-light: var(--error-light);
+$error-lightness-90: var(--error-lightness-90);
+$error-lightness-86: var(--error-lightness-86);
+$orange: var(--adfaz-orange);
+$orange-light: var(--adfaz-orange-light);
+
+// Accent colors
+$picton-blue: var(--picton-blue);
+$picton-blue-light: var(--picton-blue-light);
+$texas-rose: var(--adfaz-texas-rose);
+$texas-rose-light: var(--adfaz-texas-rose-light);
+$mauve: var(--adfaz-mauve);
+$mauve-light: var(--adfaz-mauve-light);
+
+// Typography colors
+$font-style-main: var(--adfaz-font-style-main);
+$font-style-secondary: var(--font-style-secondary);
+$font-style-placeholder: var(--adfaz-font-style-placeholder);
+
+// Background colors
+$bg-ice-blue: var(--adfaz-bg-ice-blue);
+$bg-cloud: var(--adfaz-bg-cloud);
+$bg-overlay: var(--adfaz-bg-overlay);
+
+// Borders
+$border-color-main: var(--border-color-main);
+$border-color-light: var(--adfaz-border-color-light);
+
+// Gradients
+$gradients-blue: var(--adfaz-gradients-blue);
+$gradient-icon: var(--adfaz-icon-gradient);
+
+// Shadows
+$shadow-main: var(--adfaz-shadow-main);
+$box-shadow-normal-color: var(--adfaz-box-shadow-normal-color);
+$box-shadow-normal: var(--adfaz-box-shadow-normal);
+
+// Padding
+$x-small: var(--xSmall);
+$small: var(--small);
+$medium: var(--medium);
+$large: var(--large);
+$x-large: var(--xLarge);
+$xx-large: var(--xxLarge);
+
+// Border radius
+$radius-10: var(--radius-10);
+$radius-big: var(--radius-big);
+$radius-small: var(--radius-small);
+
+// Font weights
+$f-light: var(--f-light);
+$f-regular: var(--f-regular);
+$f-medium: var(--f-medium);
+$f-semi-bold: var(--f-semi-bold);
+$f-bold: var(--f-bold);
+$f-extra-bold: var(--f-extra-bold);
+$f-black: var(--f-black);
+
+// Shadows
+$shadow-primary: var(--shadow-primary);
+$shadow-light: var(--shadow-light);
+$shadow-dark: var(--shadow-dark);
+$shadow-1: var(--shadow-1);
+$shadow-slide-item: var(--shadow-slide-item);
+$shadow-2: var(--shadow-2);
+$shadow-3: var(--shadow-3);
+$shadow-5: var(--shadow-5);
+$shadow-7: var(--shadow-7);
+$shadow-8: var(--shadow-8);
+$shadow-9: var(--shadow-9);
+$shadow-10: var(--shadow-10);
+$shadow-11: var(--shadow-11);
+
+// Transitions
+$transition: var(--transition);
+$transition-2: var(--transition-2);
+$transition-4: var(--transition-4);
+
+// Font sizes and line heights
+$font-primary: var(--font-primary);
+$font-secondary: var(--font-secondary);
+$font-alt: var(--font-alt);
+$font-size-b1: var(--font-size-b1);
+$font-size-b2: var(--font-size-b2);
+$font-size-b3: var(--font-size-b3);
+$font-size-b4: var(--font-size-b4);
+$line-height-b1: var(--line-height-b1);
+$line-height-b2: var(--line-height-b2);
+$line-height-b3: var(--line-height-b3);
+$line-height-b4: var(--line-height-b4);
+$icon--colors: var(--iconn-color);
+
+// Headings
+$h1: var(--h1);
+$h2: var(--h2);
+$h3: var(--h3);
+$h4: var(--h4);
+$h5: var(--h5);
+$h6: var(--h6);
+$div-gap-1: var(--div-gap-1);

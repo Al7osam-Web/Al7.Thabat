@@ -1,0 +1,52 @@
+.input-image {
+  border-radius: 5px;
+  width: 100%;
+  height: 42px;
+  line-height: 37px;
+  color: #565656;
+  background-color: #f1f5f7;
+  padding: 0.3rem;
+  min-height: 0px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d5e6ef;
+}
+.input-image input {
+  display: none;
+}
+.input-image .custom-image-upload {
+  display: flex;
+  width: inherit;
+  align-items: center;
+  cursor: pointer;
+}
+.input-image .custom-image-upload .chosen-image {
+  padding: 0 10px;
+}
+.input-image .custom-image-upload .chosen-image .pi-cloud-upload{
+  color:#3671ef;
+}
+.input-image .custom-image-upload .chosen-image img {
+  max-height: 2rem;
+  border-radius: inherit;
+}
+.input-image .custom-image-upload .status-text {
+  text-align: center;
+}
+.error-red {
+  color: red;
+}
+.img-view {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.delete-img{
+  position: absolute;
+  top: 7px;
+  left: 19px;
+  width: 30px;
+  height: 30px;
+  background: #f7e2e9;
+  padding: 0;
+}

@@ -1,0 +1,31 @@
+<div class="input-with-label" [ngClass]="{ 'display-row': displayInRow }">
+  <label *ngIf="label" [for]="label">{{ label | abpLocalization }}</label>
+  <!--  <select
+    (change)="onDropdownChange()"
+    [disabled]="disabled"
+    [(ngModel)]="value"
+    [id]="label"
+    class="form-select form-select-sm"
+    aria-label=".form-select-sm example">
+    <option value="null" selected>{{ placeholder | abpLocalization }}</option>
+    <ng-container *ngIf="options">
+      <option *ngFor="let opt of options" [value]="opt[optionValue]">
+        {{ opt[optionLabel] }}
+      </option>
+    </ng-container>
+  </select> -->
+  <p-dropdown (onChange)="onDropdownChange($event)" class="custom-search" [options]="options" [(ngModel)]="value" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" [placeholder]=" placeholder | abpLocalization ">
+    <ng-template pTemplate="selectedItem">
+      <div class="flex align-items-center gap-2" *ngIf="value">
+        <div>{{ selectedName }}</div>
+      </div>
+    </ng-template>
+    <ng-template let-opt pTemplate="item">
+      <div class="flex align-items-center gap-2">
+        <div>{{ opt[optionLabel] }}</div>
+      </div>
+    </ng-template>
+  </p-dropdown>
+</div>
+
+<!-- {{options |json}} -->

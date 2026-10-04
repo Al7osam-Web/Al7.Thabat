@@ -1,0 +1,14 @@
+{
+  "Culture": "en",
+  "Texts": {
+    "AppName": "Thabat",
+    "Menu:Home": "Home",
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information visit",
+    "Welcome": "Welcome",
+    "Menu:CrudExamples": "CRUD Examples",
+    "Permission:CrudExamples": "CRUD Examples",
+    "Permission:CrudExamples.Create": "Create",
+    "Permission:CrudExamples.Edit": "Edit",
+    "Permission:CrudExamples.Delete": "Delete"
+  }
+}

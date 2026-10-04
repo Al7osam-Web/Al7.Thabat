@@ -1,0 +1,30 @@
+@import '../../../../assets/styles/variables.scss';
+@import '../../../../assets/styles/mixins.scss';
+
+.unil-btn {
+  width: inherit;
+  height: inherit;
+  outline: none;
+  text-align: center;
+  font-size: inherit;
+  min-width: 115px;
+  font-size: inherit;
+  padding: 12px 14px;
+  min-height: 40px;
+  border-radius: 16px;
+
+  &.unil-gradient-btn {
+    // @include main-gradient-degree(81deg, $green-color, $main-color1);
+    border: 0px;
+    color: $white;
+    background: $them-color1;
+
+    &.disabled {
+      /// to do
+    }
+  }
+
+  &.unil-primary-btn {
+    //  to doo ...
+  }
+}

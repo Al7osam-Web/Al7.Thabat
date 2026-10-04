@@ -1,0 +1,5 @@
+<div *ngIf="control?.invalid && (control?.touched || forceShow)">
+  <small *ngFor="let errorMessage of errorMessages" class="text-danger">
+    {{ errorMessage }}
+  </small>
+</div>

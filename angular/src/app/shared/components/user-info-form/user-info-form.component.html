@@ -1,0 +1,102 @@
+<p-fieldset  legend="{{'::UserInfo' | abpLocalization }}">
+
+<div [formGroup]="form">
+<div class="row">
+  <div class="col-md-6">
+    <div class="mb-3">
+      <div class="form-group">
+        <label [for]="'::UserName'">{{ '::UserName' | abpLocalization }}</label>
+        <input
+          type="text"
+          class="form-control"
+          id="userName"
+          [placeholder]="'::UserName' | abpLocalization"
+          required="true"
+          formControlName="userName"
+          [disabled]="disabledForm"
+        />
+        <div *ngIf="showError">
+          <span [style]="{ color: 'red' }">{{ '::InvalidUsername' | abpLocalization }}</span>
+        </div>
+        <app-validation-message [control]="form.get('userName')" [errorMap]="{
+          required: 'Common.Error.Required',
+          pattern: 'Common.Error.InvalidUserName'
+        }" [formReset]="resetFormTrigger"></app-validation-message>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="mb-3">
+      <div class="form-group">
+        <label [for]="'::Email'">{{ '::Email' | abpLocalization }}</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          [placeholder]="'example@example.com'"
+          required="true"
+          formControlName="email"
+          [disabled]="disabledForm"
+
+        />
+        <div *ngIf="showEmailError">
+          <span [style]="{ color: 'red' }">{{ '::InvalidEmail' | abpLocalization }}</span>
+        </div>
+        <app-validation-message [control]="form.get('email')" [errorMap]="{
+          required: 'Common.Error.Required',
+          pattern: 'Common.Error.InvalidEmail'
+        }" [formReset]="resetFormTrigger"></app-validation-message>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+    <label class="form-label" for="phoneNumber">{{'::Common.PhoneNumber' | abpLocalization}}</label><span> * </span>
+      <input
+        #phoneInput
+        type="tel"
+        class="form-control"
+        id="phoneNumber"
+        name="phoneNumber"
+        [disabled]="disabledForm"
+        autocomplete="tel"
+      />
+         <app-validation-message [control]="form.get('phoneNumber')" [errorMap]="{
+          required: 'Common.Error.Required',
+          pattern: 'Common.Error.InvalidPhoneNumber',
+          invalidPhoneNumber: 'Common.Error.InvalidPhoneNumber'
+        }" [formReset]="resetFormTrigger"></app-validation-message>
+        <small *ngIf="form.get('phoneNumber')?.hasError('invalidPhoneNumber') && phoneNumberExample" 
+               class="text-danger d-block mt-1">
+          مثال للرقم الصحيح: {{ phoneNumberExample }}
+        </small>
+  </div>
+
+  
+
+  <div class="col-md-6" *ngIf="this.HaidePassword">
+    <div class="mb-3">
+      <label class="form-label" for="password">{{ '::Password' | abpLocalization }}</label>
+      <div class="card flex justify-content-center">
+        <p-password name="password" [toggleMask]="true" 
+        type="text" formControlName="password"></p-password>
+      </div>
+      <div *ngIf="showPasswordError">
+        <span [style]="{ color: 'red' }">
+          {{ '::InvalidPasswordLength' | abpLocalization }}
+        </span>
+        <br />
+        <span [style]="{ color: 'red' }">
+          {{ '::InvalidPasswordSchema' | abpLocalization }}
+        </span>
+        <br />
+      </div>
+    </div>
+  </div>
+
+</div>
+  
+</div></p-fieldset >

@@ -1,0 +1,16 @@
+  <label [for]="inputId"  *ngIf="label" for="fname">{{ label | abpLocalization }}</label>
+  <input
+    [type]="type"
+    [id]="inputId"
+    [disabled]="disabled"
+    [min]="min"
+    [max]="max"
+    placeholder="{{ placeholder | abpLocalization }}"
+    [(ngModel)]="value"
+    [formControlName]="inputId"
+     
+    (input)="emitInputTextValue($any($event.target).value)" 
+    class="form-control d-flex-auto" 
+    [pattern]="pattern"
+    [required]="required"
+    />

@@ -1,0 +1,19 @@
+<div class="input-with-label" [ngClass]="{ 'display-row': displayInRow }">
+  <label *ngIf="label" [for]="label">{{ label | abpLocalization }}</label>
+  <select
+    (change)="onDropdownChange()"
+    [disabled]="disabled"
+    [(ngModel)]="value"
+    [id]="label"
+    class="form-select form-select-sm"
+    aria-label=".form-select-sm example">
+    <option *ngIf="showDefualt" value="null" selected>{{ placeholder | abpLocalization }}</option>
+    <ng-container *ngIf="options">
+      <option *ngFor="let opt of options" [value]="opt[optionValue]">
+        {{ opt[optionLabel] }}
+      </option>
+    </ng-container>
+  </select>
+</div>
+
+<!-- {{options |json}} -->

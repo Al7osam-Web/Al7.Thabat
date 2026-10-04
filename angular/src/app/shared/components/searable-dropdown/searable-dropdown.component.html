@@ -1,0 +1,19 @@
+<div class="dropdown">
+  <div class="form-select" (click)="toggle()">
+    <span> {{ selectedItem.name }} </span>
+  </div>
+  <div id="edmsDropdown" class="dropdown-content">
+    <div class="dropdown-content-header">
+      <input #search id="myInput" class="search-input" type="text" [placeholder]="'shared.search' | abpLocalization" [formControl]="searchCtrl" />
+    </div>
+    <div id="OptionsList" class="dropdown-items-wrapper">
+      <ng-container *ngFor="let group of options">
+        <ng-container *ngIf="group.children.length>0">
+          <span class="group-name">{{ group.name|translate }}</span>
+          <a *ngFor="let option of group.children" (click)="onItemClick(option)">{{ option.name +' - '+(option.currentStatisticalValue==null?'undefined':option.currentStatisticalValue)}}</a>
+        </ng-container>
+
+      </ng-container>
+    </div>
+  </div>
+</div>

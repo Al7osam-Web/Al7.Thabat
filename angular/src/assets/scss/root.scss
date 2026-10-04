@@ -1,0 +1,124 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&display=swap');
+
+
+
+
+:root {
+    --primary-main: #8065f2;
+    --primary-dark: #153c83;
+    --primary-light: #f8f9fa;
+     --adfaz-primary-very-light: #f8fbfd;
+     --adfaz-primary-opacity:#f0eefe;
+    // --adfaz-secondary-main: #ed3165;
+    // --adfaz-secondary-dark: #ed3165;
+    --adfaz-secondary-main: #8065f2;
+    --adfaz-secondary-dark: #8065f2;
+    --adfaz-thired-main: #8065f2;
+    --secondary-light: #f8f3fe;
+    --adfaz-white: #fff;
+    --grey: #e8e8e8 ;
+    --grey-main: #4A5A6B;
+    --grey-light: #fcfcfc;
+    --adfaz-black: #000;
+    --success: #24a672;
+    --error: #ed3165;
+    --error-light: #201818;
+    --error-lightness-90: #FDCECE;
+    --error-lightness-86: #FDBABA;
+    --adfaz-orange: #FDAA3E;
+    --adfaz-orange-light: #FFEBD1;
+    --picton-blue: #0065A4;
+    --picton-blue-light: #F1FAFF;
+    --adfaz-texas-rose: #FFBC4F;
+    --adfaz-texas-rose-light: #FFF5E5;
+    --adfaz-mauve: #B898FE;
+    --adfaz-mauve-light: #F9F7FF;
+    --adfaz-font-style-main: #1f2f3e;
+    --font-style-secondary: #5D758E;
+    --adfaz-font-style-placeholder: #C3C6C9;
+    --adfaz-bg-ice-blue: #F7FBFF;
+    --adfaz-bg-cloud: #FAFBFC;
+    --adfaz-bg-overlay: rgba(0, 0, 0, 0.7);
+   --border-color-main: #d9dee7;
+    --adfaz-border-color-light: #EFF3F6;
+    --adfaz-gradients-blue: linear-gradient(0deg, var(--primary-light) 0%, #fff 100%);
+    --adfaz-icon-gradient:linear-gradient(45deg, #73767a, #7099b3);
+    --lpx-brand:#0ab2ec;
+    --iconn-color: #A1A5B7;
+
+    // Shadows
+    --adfaz-shadow-main: #0000001a;
+    --adfaz-box-shadow-normal-color: rgba(20, 50, 80, 0.12);
+    --adfaz-box-shadow-normal: box-shadow: 0px 2px 35px 0px var(--adfaz-shadow-main);
+
+   // padding
+   --xSmall: 8px;
+   --small : 10px;
+   --medium: 15px;
+   --large: 20px;
+   --xLarge:30px;
+--xxLarge:50px;
+
+//border-radauis
+--radius-10: 10px;
+--radius-big: 50px;
+ --radius-small: 6px;
+
+//font-weight
+--f-light: 300;
+  --f-regular: 400;
+  --f-medium: 500;
+  --f-semi-bold: 600;
+  --f-bold: 700;
+  --f-extra-bold: 800;
+  --f-black: 900;
+
+//shadow
+  --shadow-primary: 0px 4px 10px rgba(37, 47, 63, 0.1);
+  --shadow-light: 0 2px 6px 0 rgba(0, 0, 0, 0.05);
+  --shadow-dark: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  --shadow-1: 0px 6px 34px rgba(215, 216, 222, 0.41);
+  --shadow-slide-item: 0px 0 10px 0 rgba(215, 216, 222, 0.20);
+  --shadow-2: 0 15px 34px 0 rgba(175, 181, 204, 0.32);
+  --shadow-3: 0 5px 15px 0 rgba(85, 74, 101, 0.37);
+  --shadow-5: 0px 20px 70px 0px rgba(0, 0, 0, 0.1);
+  --shadow-7: 0px 15px 30px -2px rgba(0, 0, 0, 0.1);
+  --shadow-8: -5px 18px 60px 0 rgba(210, 210, 234, 0.4);
+  --shadow-9: 0 13px 48px 0 rgba(215, 216, 222, 0.44);
+  --shadow-10: 0 13px 14px 0 rgba(129, 104, 145, 0.05);
+  --shadow-11: 0 0 10px 0 rgba(0, 0, 0, 0.06);
+
+  //transation
+  --transition: 0.3s;
+  --transition-2: 256ms ease-in-out;
+    --transition-4: all .25s cubic-bezier(.645,.045,.355,1);
+
+  //font-size
+
+  --font-primary: "Noto Sans Arabic", sans-serif;
+  --font-secondary: "Noto Sans Arabic", sans-serif;
+  --font-alt: "Noto Sans Arabic", sans-serif;
+  --font-size-b1: 24px;
+  --font-size-b2: 18px;
+  --font-size-b3: 16px;
+  --font-size-b4: 12px;
+  --line-height-b1: 1.5;
+  --line-height-b2: 1.67;
+  --line-height-b3: 1.67;
+  --line-height-b4: 1;
+  --h1: 52px;
+  --h2: 44px;
+  --h3: 34px;
+  --h4: 30px;
+  --h5: 20px;
+  --h6: 16px;
+  --div-gap-1: 10px;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}

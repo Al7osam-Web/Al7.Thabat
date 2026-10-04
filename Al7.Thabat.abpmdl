@@ -1,0 +1,97 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "4.1.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account": {
+      "version": "9.1.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "9.1.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.Identity": {
+      "version": "9.1.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "9.1.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "9.1.1",
+      "isInstalled": true
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "9.1.1",
+      "isInstalled": true
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Al7.Thabat.Application": {
+      "path": "src/Al7.Thabat.Application/Al7.Thabat.Application.abppkg",
+      "folder": "src"
+    },
+    "Al7.Thabat.Application.Tests": {
+      "path": "test/Al7.Thabat.Application.Tests/Al7.Thabat.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Al7.Thabat.Domain.Shared": {
+      "path": "src/Al7.Thabat.Domain.Shared/Al7.Thabat.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "Al7.Thabat.Application.Contracts": {
+      "path": "src/Al7.Thabat.Application.Contracts/Al7.Thabat.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Al7.Thabat.HttpApi": {
+      "path": "src/Al7.Thabat.HttpApi/Al7.Thabat.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Al7.Thabat.HttpApi.Client": {
+      "path": "src/Al7.Thabat.HttpApi.Client/Al7.Thabat.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Al7.Thabat.EntityFrameworkCore.Tests": {
+      "path": "test/Al7.Thabat.EntityFrameworkCore.Tests/Al7.Thabat.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Al7.Thabat.EntityFrameworkCore": {
+      "path": "src/Al7.Thabat.EntityFrameworkCore/Al7.Thabat.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Al7.Thabat.TestBase": {
+      "path": "test/Al7.Thabat.TestBase/Al7.Thabat.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Al7.Thabat.Domain.Tests": {
+      "path": "test/Al7.Thabat.Domain.Tests/Al7.Thabat.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Al7.Thabat.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Al7.Thabat.HttpApi.Client.ConsoleTestApp/Al7.Thabat.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "Al7.Thabat.DbMigrator": {
+      "path": "src/Al7.Thabat.DbMigrator/Al7.Thabat.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "Al7.Thabat.HttpApi.Host": {
+      "path": "src/Al7.Thabat.HttpApi.Host/Al7.Thabat.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "Al7.Thabat.Domain": {
+      "path": "src/Al7.Thabat.Domain/Al7.Thabat.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

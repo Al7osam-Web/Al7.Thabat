@@ -1,0 +1,23 @@
+export enum TableHeaderType {
+  Text = 'text',
+  TextArea = 'textArea',
+CkEditor = 'ckEditor',
+  Numeric = 'numeric',
+  Boolean = 'boolean',
+  Date = 'date',
+  DateTime = 'dateTime',
+  Enum = 'enum',
+  ApprovalState = 'ApprovalState',
+  Avatar = 'Avatar',
+  Link = 'link',
+  Special = 'special',
+  MultiSelect = 'multiSelect',
+  Switch = 'switch',
+ RedirectTo = 'redirectTo',
+ ApprovalButton = 'approvalButton',
+  Custom = 'custom',
+  Pic = 'pic',
+  Rating = 'rating',
+  IdSelect = 'idSelect',
+
+}

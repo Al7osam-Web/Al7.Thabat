@@ -1,0 +1,13 @@
+<button
+  (click)="showOverlay($event)"
+  type="button"
+  aria-haspopup="true"
+  class="p-column-filter-menu-button p-link"
+  aria-expanded="false"
+>
+  <span class="pi pi-filter-icon pi-filter ng-tns-c335-43"></span>
+</button>
+
+<p-overlayPanel class="enum-filter-overlay" #overlayPanel> 
+  <input type="text" pInputText  (onChange)="onValueChange($event)" placeholder="searsh"    [(ngModel)]="selectedValue" />
+</p-overlayPanel>
