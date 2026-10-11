@@ -6,7 +6,9 @@ public class ThabatSettingDefinitionProvider : SettingDefinitionProvider
 {
     public override void Define(ISettingDefinitionContext context)
     {
-        //Define your own settings here. Example:
-        //context.Add(new SettingDefinition(ThabatSettings.MySetting1));
+        context.Add(new SettingDefinition(ThabatSettings.TermsAndConditionsAr, "", isVisibleToClients: true));
+        context.Add(new SettingDefinition(ThabatSettings.TermsAndConditionsEn, "", isVisibleToClients: true));
+        context.Add(new SettingDefinition(ThabatSettings.PrivacyPolicyAr, "", isVisibleToClients: true));
+        context.Add(new SettingDefinition(ThabatSettings.PrivacyPolicyEn, "", isVisibleToClients: true));
     }
 }

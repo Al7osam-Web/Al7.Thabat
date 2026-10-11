@@ -1,2 +1,4 @@
+import * as Clients from './clients';
 import * as CrudExamples from './crud-examples';
-export { CrudExamples };
+import * as SitePages from './site-pages';
+export { Clients, CrudExamples, SitePages };

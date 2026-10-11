@@ -1,81 +1,104 @@
-<div class="lpx-container">
-  <div class="lpx-login-card text-center">
-    <h2 class="mb-5">
-      {{ 'AbpAccount::Login' | abpLocalization }}
-    </h2>
+<div class="account-form login-form" [abpLoading]="pageLoading">
+  <header class="login-form__header">
+    <h2 class="login-form__eyebrow">{{ '::Account:Login:Welcome' | abpLocalization }}</h2>
+    <h1 class="login-form__title">{{ '::Account:Login:WelcomeTitle' | abpLocalization }}</h1>
+    <p class="login-form__subtitle">
+      {{ '::Account:Login:Subtitle' | abpLocalization }}
+    </p>
+  </header>
 
-    <!-- start register line -->
-    @if (isSelfRegistrationEnabled) {
-    <strong>
-      {{ 'AbpAccount::AreYouANewUser' | abpLocalization }}
-      <a
-        class="text-decoration-none"
-        routerLink="/account/register"
-        queryParamsHandling="preserve"
-        >{{ 'AbpAccount::Register' | abpLocalization }}</a
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" validateOnSubmit class="login-form__fields">
+    <div class="login-form__field" validationContainer>
+      <label
+        for="login-input-user-name-or-email-address"
+        class="sand-input-label"
       >
-    </strong>
-    }
-    <!-- end register line -->
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" validateOnSubmit class="mt-4 text-start">
-      <div class="mb-3 form-group">
-        <label for="login-input-user-name-or-email-address" class="form-label">
-          {{ 'AbpAccount::UserNameOrEmailAddress' | abpLocalization }}
-        </label>
-        <input
-          class="form-control"
-          type="text"
-          placeholder=" {{ 'AbpAccount::UserNameOrEmailAddress' | abpLocalization }}"
-          id="login-input-user-name-or-email-address"
-          formControlName="username"
-          autocomplete="username"
-          autofocus
-        />
-      </div>
-      <div class="mb-3 form-group">
-        <label for="login-input-password" class="form-label">{{
-          'AbpAccount::Password' | abpLocalization
-        }}</label>
-        <input
-          class="form-control"
-          type="password"
-          id="login-input-password"
-          placeholder="{{ 'AbpAccount::Password' | abpLocalization }}"
-          formControlName="password"
-          autocomplete="current-password"
-        />
-      </div>
-
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="p-0">
-          <div class="form-check p-0">
-            <label class="form-check-label mb-2" for="login-input-remember-me">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="login-input-remember-me"
-                formControlName="rememberMe"
-              />
-              {{ 'AbpAccount::RememberMe' | abpLocalization }}
-            </label>
-          </div>
-        </div>
-        <div class="text-end p-0">
-          <a routerLink="/account/forgot-password">{{
-            'AbpAccount::ForgotPassword' | abpLocalization
-          }}</a>
+        {{ '::Account:Login:Username' | abpLocalization }}
+      </label>
+      <div class="sand-input-group sand-input-group--lg">
+        <span class="sand-input-group__addon sand-input-group__addon--start" aria-hidden="true">
+          <i class="fi fi-rr-user"></i>
+        </span>
+        <div class="sand-input-group__control">
+          <input
+            class="sand-input-group__field"
+            type="text"
+            [placeholder]="'::Account:Login:UsernamePlaceholder' | abpLocalization"
+            id="login-input-user-name-or-email-address"
+            formControlName="username"
+            autocomplete="username"
+            autofocus
+          />
         </div>
       </div>
+      <div class="login-form__field-error" validationTarget></div>
+    </div>
 
-      <abp-button
-        [loading]="inProgress"
-        buttonType="submit"
-        class="btn-login"
-        name="Action"
-        buttonClass="btn-block  btn-lg mt-3 btn btn-primary w-100"
-      >
-        {{ 'AbpAccount::Login' | abpLocalization }}
-      </abp-button>
-    </form>
+    <div class="login-form__field" validationContainer>
+      <label for="login-input-password" class="sand-input-label">
+        {{ '::Account:Login:Password' | abpLocalization }}
+      </label>
+      <div class="sand-input-group sand-input-group--lg">
+        <span class="sand-input-group__addon sand-input-group__addon--start" aria-hidden="true">
+          <i class="fi fi-rr-lock"></i>
+        </span>
+        <div class="sand-input-group__control">
+          <input
+            class="sand-input-group__field"
+            [type]="passwordVisible ? 'text' : 'password'"
+            [placeholder]="'::Account:Login:PasswordPlaceholder' | abpLocalization"
+            id="login-input-password"
+            formControlName="password"
+            autocomplete="current-password"
+          />
+        </div>
+        <span class="sand-input-group__addon sand-input-group__addon--end">
+          <button
+            type="button"
+            class="sand-input-group__toggle"
+            tabindex="-1"
+            (click)="togglePasswordVisible()"
+            [attr.aria-pressed]="passwordVisible"
+            [attr.aria-label]="
+              passwordVisible
+                ? ('::Account:Common:HidePassword' | abpLocalization)
+                : ('::Account:Common:ShowPassword' | abpLocalization)
+            "
+          >
+            <i class="fi" [ngClass]="passwordVisible ? 'fi-rr-eye-crossed' : 'fi-rr-eye'"></i>
+          </button>
+        </span>
+      </div>
+      <div class="login-form__field-error" validationTarget></div>
+    </div>
+
+    <div class="login-form__options login-form__options--end">
+      <a class="login-form__forgot" routerLink="/account/forgot-password">
+        {{ '::Account:Login:ForgotPassword' | abpLocalization }}
+      </a>
+    </div>
+
+    <abp-button
+      [loading]="inProgress"
+      loadingIcon="pi pi-spin pi-spinner"
+      buttonType="submit"
+      class="btn-login login-form__submit"
+      name="Action"
+      buttonClass="btn btn-primary login-form__submit-btn"
+    >
+      <span class="login-form__submit-content">
+        <i class="fi fi-rr-arrow-left" aria-hidden="true"></i>
+        {{ '::Account:Login:SubmitButton' | abpLocalization }}
+      </span>
+    </abp-button>
+  </form>
+
+  <div class="login-form__divider" role="presentation">
+    <span>{{ '::Account:Login:Or' | abpLocalization }}</span>
   </div>
+
+  <p class="login-form__trust-badge">
+    <i class="fi fi-rr-shield-check" aria-hidden="true"></i>
+    {{ '::Account:Login:TrustBadge' | abpLocalization }}
+  </p>
 </div>

@@ -6,7 +6,6 @@ const oAuthConfig = {
   issuer: 'https://localhost:44346/',
   redirectUri: baseUrl,
   clientId: 'Thabat_App',
-  responseType: 'code',
   scope: 'offline_access Thabat',
   requireHttps: true,
 };

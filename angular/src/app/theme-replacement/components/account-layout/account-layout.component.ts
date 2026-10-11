@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 //import { AuthWrapperService, TenantBoxService } from '@volo/abp.ng.account.core';
 import { AuthWrapperService, TenantBoxService } from '@abp/ng.account.core';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { ConfigStateService, LanguageInfo, SessionStateService } from '@abp/ng.c
   styleUrls: ['./account-layout.component.scss'],
   providers: [AuthWrapperService, TenantBoxService],
 })
-export class AccountLayoutComponent {
+export class AccountLayoutComponent implements OnInit, OnDestroy {
   languages$: Observable<LanguageInfo[]> = this.configState.getDeep$('localization.languages');
   constructor(
     public router: Router,
@@ -23,6 +23,35 @@ export class AccountLayoutComponent {
     public tenantBoxService: TenantBoxService,
     private cdr: ChangeDetectorRef
   ) {}
+
+  ngOnInit() {
+    this.forceLightTheme();
+  }
+
+  ngOnDestroy() {
+    this.restoreSavedTheme();
+  }
+
+  private forceLightTheme(): void {
+    document.documentElement.classList.add('account-theme-light');
+    document.documentElement.style.colorScheme = 'only light';
+    document.body.classList.add('account-theme-light');
+    document.body.classList.remove('dark-mode');
+    document.body.style.colorScheme = 'only light';
+  }
+
+  private restoreSavedTheme(): void {
+    document.documentElement.classList.remove('account-theme-light');
+    document.documentElement.style.removeProperty('color-scheme');
+    document.body.classList.remove('account-theme-light');
+    document.body.style.removeProperty('color-scheme');
+
+    const savedTheme = localStorage.getItem('theme');
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedTheme === 'dark' || savedDarkMode === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+  }
 
   get defaultLanguage$(): Observable<LanguageInfo> {
     return this.languages$.pipe(

@@ -11,4 +11,17 @@ public static class ThabatPermissions
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
     }
+
+    public static class SitePages
+    {
+        public const string Default = GroupName + ".SitePages";
+    }
+
+    public static class Clients
+    {
+        public const string Default = GroupName + ".Clients";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
 }

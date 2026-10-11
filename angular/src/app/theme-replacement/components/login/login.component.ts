@@ -23,6 +23,8 @@ export class LoginComponent extends AppComponentBase implements OnInit {
   form!: UntypedFormGroup;
 
   inProgress?: boolean;
+  pageLoading = false;
+  passwordVisible = false;
 
   isSelfRegistrationEnabled = false;
 
@@ -51,6 +53,10 @@ export class LoginComponent extends AppComponentBase implements OnInit {
     });
   }
 
+  togglePasswordVisible(): void {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
   onSubmit() {
     this.login();
   }
@@ -59,6 +65,7 @@ export class LoginComponent extends AppComponentBase implements OnInit {
     if (this.form.invalid) return;
 
     this.inProgress = true;
+    this.pageLoading = true;
 
     const { username, password, rememberMe } = this.form.value;
     const redirectUrl = getRedirectUrl(this.injector);
@@ -67,6 +74,7 @@ export class LoginComponent extends AppComponentBase implements OnInit {
       .login({ username, password, rememberMe, redirectUrl })
       .pipe(
         catchError(err => {
+          this.pageLoading = false;
           this.toasterService.error(
             err.error?.error_description ||
               err.error?.error.message ||

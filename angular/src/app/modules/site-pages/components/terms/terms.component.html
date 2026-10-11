@@ -1,0 +1,46 @@
+<div class="site-page-form">
+  <p class="site-page-form__subtitle">{{ '::SitePages:Terms.Hint' | abpLocalization }}</p>
+
+  <div *ngIf="isLoading" class="site-page-form__loading">
+    <div class="spinner-border" role="status"></div>
+  </div>
+
+  <div class="site-page-form__content" *ngIf="!isLoading">
+    <section class="site-page-section">
+      <header class="site-page-section__header">
+        <span class="site-page-section__icon"><i class="fa fa-file-text-o"></i></span>
+        <h3 class="site-page-section__title">{{ '::SitePages:Terms.Title' | abpLocalization }}</h3>
+      </header>
+      <div class="site-page-section__body">
+        <div class="site-page-lang">
+          <div class="site-page-lang__field">
+            <label class="form-label required">
+              <span class="site-page-lang__badge">{{ '::SitePages:Language.Arabic' | abpLocalization }}</span>
+              {{ '::SitePages:Terms.Fields.Description' | abpLocalization }}
+            </label>
+            <div class="site-page-lang__editor" dir="rtl">
+              <p-editor [(ngModel)]="descriptionAr" [style]="{ height: '280px' }"></p-editor>
+            </div>
+          </div>
+          <div class="site-page-lang__field">
+            <label class="form-label required">
+              <span class="site-page-lang__badge site-page-lang__badge--en">{{ '::SitePages:Language.English' | abpLocalization }}</span>
+              {{ '::SitePages:Terms.Fields.Description' | abpLocalization }}
+            </label>
+            <div class="site-page-lang__editor" dir="ltr">
+              <p-editor [(ngModel)]="descriptionEn" [style]="{ height: '280px' }"></p-editor>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="site-page-form__footer">
+      <button type="button" class="site-page-form__save-btn" (click)="save()" [disabled]="isSaving">
+        <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+        <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+        {{ '::SitePages:Save' | abpLocalization }}
+      </button>
+    </div>
+  </div>
+</div>

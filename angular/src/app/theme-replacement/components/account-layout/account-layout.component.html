@@ -1,156 +1,46 @@
-<div class="d-flex align-items-center new-login">
-  <div class="container-fluid p-0">
-    <div class="d-flex align-items-center justify-content-center login-container">
-      <div class="image-login">
-        <div class="content">
-          <!-- <img src="../../../../assets/images/login-image.png" alt="login" class="img-fluid" /> -->
-          <div class="content-image mt-2 text-center">
-            <h3 class="text-white mb-3 mt-5">أهلاً بك في ثبات</h3>
-            <span class="text-white">لوحة التحكم الخاصة بنظام ثبات.</span>
-            <!-- <a class="btn mt-3" [href]="frontRedirectUri" target="_blank">
-              {{ '::Pages.AccountLayout.SideImage.BackToSite' | abpLocalization }}
-            </a> -->
+<div class="account-page new-login">
+  <div class="account-split login-split">
+    <aside class="login-split__brand">
+      <div class="login-split__brand-inner">
+        <div class="login-split__brand-header">
+          <div class="login-logo-box">
+            <img
+              class="login-logo"
+              src="assets/images/logo/thabat-logo.png"
+              alt="{{ '::AppName' | abpLocalization }}"
+            />
           </div>
         </div>
-      </div>
-      <div class="card-login">
-        <div>
-          <abp-languages></abp-languages>
-          <abp-account-logo></abp-account-logo>
-          <div class="cardd">
-            <div class="cardd-header">
-              <!-- <nav class="navbar navbar-expand p-0 pt-1 float-end">
-              <ul class="navbar-nav ms-auto toolbar-nav">
-                <li class="nav-item">
-                  <div class="dropdown" ngbDropdown [autoClose]="'outside'">
-                    <a
-                      *ngIf="defaultLanguage$ | async as defaultLang"
-                      class="pointer"
-                      role="button"
-                      id="dropdownMenuLink"
-                      ngbDropdownToggle
-                      [class.dropdown-toggle]="false"
-                    >
-                      <span
-                        class="flag-icon flag-icon-squared flag-icon-{{ defaultLang.flagIcon }}"
-                      ></span>
-                    </a>
-                    <div
-                      ngbDropdownMenu
-                      class="dropdown-menu dropdown-menu-end"
-                      *ngIf="(dropdownLanguages$ | async)?.length"
-                    >
-                      <a
-                        *ngFor="let lang of dropdownLanguages$ | async"
-                        class="dropdown-item pointer"
-                        (click)="onChangeLang(lang.cultureName)"
-                      >
-                        <span
-                          class="flag-icon flag-icon-{{ lang.flagIcon }} flag-icon-squared me-2"
-                        ></span>
-                        {{ lang?.displayName }}</a
-                      >
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </nav> -->
-            </div>
 
-            <!-- start tenant box -->
-            <!--  <ng-container
-            *ngIf="
-              (authWrapperService.isMultiTenancyEnabled$ | async) &&
-              authWrapperService.isTenantBoxVisible
-            "
-          >
-            <ng-container *ngIf="(tenantBoxService.currentTenant$ | async) || {} as currentTenant">
-              <div class="card-header bg-light">
-                <div class="tenant-switch-box">
-                  <div class="row">
-                    <div class="col pe-1">
-                      <h6 class="m-0">
-                        {{ 'AbpUiMultiTenancy::Tenant' | abpLocalization }}
-                      </h6>
-                      <i>{{
-                        currentTenant.name || ('AbpUiMultiTenancy::NotSelected' | abpLocalization)
-                      }}</i>
-                    </div>
-
-                    <div class="col-auto ps-1">
-                      <a
-                        id="abp-tenant-switch-link"
-                        class="btn btn-sm btn-outline-primary float-end pointer"
-                        (click)="tenantBoxService.onSwitch()"
-                        href="javascript:void(0)"
-                        >{{ 'AbpUiMultiTenancy::Switch' | abpLocalization }}</a
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <abp-modal
-                [(visible)]="tenantBoxService.isModalVisible"
-                [busy]="tenantBoxService.modalBusy"
-              >
-                <ng-template #abpHeader>
-                  <h5>Switch Tenant</h5>
-                </ng-template>
-                <ng-template #abpBody>
-                  <form (ngSubmit)="tenantBoxService.save()">
-                    <div class="mt-2">
-                      <div class="mb-3">
-                        <label for="name" class="form-label">{{
-                          'AbpUiMultiTenancy::Name' | abpLocalization
-                        }}</label>
-                        <input
-                          [(ngModel)]="tenantBoxService.name"
-                          type="text"
-                          id="name"
-                          name="tenant"
-                          class="form-control"
-                          autofocus
-                        />
-                      </div>
-                      <p>{{ 'AbpUiMultiTenancy::SwitchTenantHint' | abpLocalization }}</p>
-                    </div>
-                  </form>
-                </ng-template>
-                <ng-template #abpFooter>
-                  <button abpClose type="button" class="btn btn-secondary">
-                    {{ 'AbpAccount::Cancel' | abpLocalization }}
-                  </button>
-                  <abp-button
-                    type="abp-button"
-                    iconClass="fa fa-check"
-                    (click)="tenantBoxService.save()"
-                    [disabled]="currentTenant?.name === tenantBoxService.name"
-                  >
-                    {{ 'AbpAccount::Save' | abpLocalization }}
-                  </abp-button>
-                </ng-template>
-              </abp-modal>
-            </ng-container>
-          </ng-container> -->
-            <!-- end tenant box -->
-            <!-- start page content box -->
-            <div
-              class="cardd-body"
-              *ngIf="authWrapperService.enableLocalLogin$ | async; else disableLocalLoginTemplate"
-            >
-              <router-outlet></router-outlet>
-            </div>
-            <!-- start page content box -->
-          </div>
+        <div class="login-split__brand-copy">
+          <h1 class="login-split__brand-title" dir="auto">
+            {{ '::Account:Brand:Title' | abpLocalization }}
+          </h1>
+          <p class="login-split__brand-description" dir="auto">
+            {{ '::Account:Brand:Description' | abpLocalization }}
+          </p>
         </div>
       </div>
-    </div>
-    <ng-template #disableLocalLoginTemplate>
-      <div class="alert alert-warning">
-        <strong>{{ 'AbpAccount::InvalidLoginRequest' | abpLocalization }}</strong>
-        {{ 'AbpAccount::ThereAreNoLoginSchemesConfiguredForThisClient' | abpLocalization }}
+    </aside>
+
+    <section class="login-split__form">
+      <div class="login-split__form-top">
+        <abp-languages></abp-languages>
       </div>
-    </ng-template>
+
+      <div
+        class="login-split__form-body"
+        *ngIf="authWrapperService.enableLocalLogin$ | async; else disableLocalLoginTemplate"
+      >
+        <router-outlet></router-outlet>
+      </div>
+
+      <ng-template #disableLocalLoginTemplate>
+        <div class="alert alert-warning">
+          <strong>{{ 'AbpAccount::InvalidLoginRequest' | abpLocalization }}</strong>
+          {{ 'AbpAccount::ThereAreNoLoginSchemesConfiguredForThisClient' | abpLocalization }}
+        </div>
+      </ng-template>
+    </section>
   </div>
 </div>

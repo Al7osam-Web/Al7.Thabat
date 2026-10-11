@@ -21,6 +21,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
   },
+  {
+    path: 'site-pages',
+    loadChildren: () => import('./modules/site-pages/site-pages.module').then(m => m.SitePagesModule),
+    canActivate: [authGuard, permissionGuard],
+    data: { requiredPolicy: 'Thabat.SitePages' },
+  },
+  {
+    path: 'clients',
+    loadChildren: () => import('./modules/clients/clients.module').then(m => m.ClientsModule),
+    canActivate: [authGuard, permissionGuard],
+    data: { requiredPolicy: 'Thabat.Clients' },
+  },
 ];
 
 @NgModule({

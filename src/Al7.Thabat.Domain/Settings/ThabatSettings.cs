@@ -2,8 +2,10 @@
 
 public static class ThabatSettings
 {
-    private const string Prefix = "Thabat";
-
-    //Add your own setting names here. Example:
-    //public const string MySetting1 = Prefix + ".MySetting1";
+    public const string TermsAndConditions = "SitePages.TermsAndConditions";
+    public const string TermsAndConditionsAr = "SitePages.TermsAndConditionsAr";
+    public const string TermsAndConditionsEn = "SitePages.TermsAndConditionsEn";
+    public const string PrivacyPolicy = "SitePages.PrivacyPolicy";
+    public const string PrivacyPolicyAr = "SitePages.PrivacyPolicyAr";
+    public const string PrivacyPolicyEn = "SitePages.PrivacyPolicyEn";
 }

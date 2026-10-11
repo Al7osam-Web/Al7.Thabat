@@ -51,7 +51,7 @@
         [showCurrentPageReport]="true"
         [selectionPageOnly]="true"
         [exportHeader]="'customExportHeader'" 
-        [scrollable]="true"
+        [scrollable]="scrollable"
         [sortMode]="sortable ? 'multiple' : ''"
         [dataKey]="recordKey"
         [(selection)]="selectedRecords"
@@ -153,7 +153,7 @@
             </th>
           </tr>
           <tr class="search-tr" *ngIf="!isAdvancedFilter">
-            <th class="check-box-header"></th>
+            <th class="check-box-header" *ngIf="canSelect"></th>
             <th
               id=""
               [ngClass]="{ 'd-none': col.hidden, 'hide-sort': col.removeSorting }"
@@ -179,7 +179,7 @@
                   [matchMode]="'contains'"
                 ></p-columnFilter>
               </div>
-              <div class="headerTableItem" *ngIf="col.type == 'date'">
+              <div class="headerTableItem" *ngIf="col.type == 'date' && !col.removeFlitter">
                 <p-columnFilter
                   matchMode="date"
                   type="date"
@@ -296,7 +296,8 @@
             </td>
             <td
               *ngFor="let col of columns; trackBy: trackByIndex"
-              (click)="onRowClicked(rowData.id)"
+              (click)="col.isClickable && onRowClicked(rowData.id)"
+              [class.is-clickable]="col.isClickable"
               [ngClass]="{
                 'd-none': col.hidden,
                 'notActive-row':
@@ -369,25 +370,34 @@
                   *ngSwitchCase="TableHeaderType.Enum"
                   class="spinner-loading"
                 >
-                  <p-inputIcon
-                    [styleClass]="{
-                      'pi pi-spinner pi-spin': isRowLoaded(rowData, col.field),
-                      'pi pi-check-circle text-green-500': isRowLoaded(rowData, col.field)
-                    }"
-                  />
-
-                  <p-dropdown
-                    *ngSwitchCase="TableHeaderType.Enum"
-                    [(ngModel)]="rowData[col.field]"
-                    [options]="col.enum | keyvalue"
-                    optionLabel="key"
-                    optionValue="value"
-                    placeholder="Select a {{ col.name }}"
-                    [required]="col.required"
-                    [disabled]="col.disabled || (rowData['isCantEdit'] !=null  && rowData['isCantEdit'] == true)"
-                    (onChange)="onStatusChange(col, rowData.id, rowData[col.field])"
+                  <div
+                    *ngIf="col.extraData?.asSwitch; else statusDropdown"
+                    class="grid-status-switch"
+                    [class.is-on]="rowData[col.field]"
+                    [class.is-off]="!rowData[col.field]"
                   >
-                  </p-dropdown>
+                    <span class="grid-status-switch__label">
+                      {{ getEnumKeyByEnumValue(col.enum, rowData[col.field]) }}
+                    </span>
+                    <p-inputSwitch
+                      [(ngModel)]="rowData[col.field]"
+                      [disabled]="col.disabled"
+                      (onChange)="onStatusChange(col, rowData.id, $event.checked)"
+                    ></p-inputSwitch>
+                  </div>
+                  <ng-template #statusDropdown>
+                    <p-dropdown
+                      [(ngModel)]="rowData[col.field]"
+                      [options]="col.enum | keyvalue"
+                      optionLabel="key"
+                      optionValue="value"
+                      placeholder="Select a {{ col.name }}"
+                      [required]="col.required"
+                      [disabled]="col.disabled || (rowData['isCantEdit'] !=null  && rowData['isCantEdit'] == true)"
+                      (onChange)="onStatusChange(col, rowData.id, rowData[col.field])"
+                    >
+                    </p-dropdown>
+                  </ng-template>
                 </p-iconField>
                 <!-- Number template -->
                 <span *ngSwitchCase="TableHeaderType.Numeric">

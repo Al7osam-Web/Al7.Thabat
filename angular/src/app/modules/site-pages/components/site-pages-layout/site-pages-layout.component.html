@@ -1,0 +1,40 @@
+<div class="site-pages-shell">
+  <header class="site-pages-shell__hero">
+    <div class="site-pages-shell__hero-content">
+      <nav class="site-pages-shell__breadcrumb" aria-label="breadcrumb">
+        <span>{{ '::NavItems:SitePages' | abpLocalization }}</span>
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+        <span class="site-pages-shell__breadcrumb-current">
+          {{ activeTab.labelKey | abpLocalization }}
+        </span>
+      </nav>
+      <div class="site-pages-shell__hero-row">
+        <div>
+          <h1 class="site-pages-shell__title">{{ activeTab.labelKey | abpLocalization }}</h1>
+          <p class="site-pages-shell__description">
+            {{ activeTab.descriptionKey | abpLocalization }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="site-pages-shell__tabs-wrap">
+    <nav class="site-pages-shell__tabs" [attr.aria-label]="'::NavItems:SitePages' | abpLocalization">
+      <a
+        *ngFor="let tab of tabs"
+        [routerLink]="['/site-pages', tab.path]"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="site-pages-shell__tab"
+      >
+        <i class="fa" [ngClass]="tab.icon" aria-hidden="true"></i>
+        <span>{{ tab.labelKey | abpLocalization }}</span>
+      </a>
+    </nav>
+  </div>
+
+  <div class="site-pages-shell__card">
+    <router-outlet></router-outlet>
+  </div>
+</div>

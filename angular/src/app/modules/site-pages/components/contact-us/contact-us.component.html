@@ -1,0 +1,168 @@
+<div class="site-page-form">
+  <p class="site-page-form__subtitle">{{ '::SitePages:ContactUs.Hint' | abpLocalization }}</p>
+
+  <div *ngIf="isLoading" class="site-page-form__loading">
+    <div class="spinner-border" role="status"></div>
+  </div>
+
+  <div class="site-page-form__content" *ngIf="!isLoading">
+    <section class="site-page-section">
+      <header class="site-page-section__header">
+        <span class="site-page-section__icon"><i class="fa fa-envelope-o"></i></span>
+        <h3 class="site-page-section__title">{{ '::SitePages:ContactUs.Section.Emails' | abpLocalization }}</h3>
+      </header>
+      <div class="site-page-section__body">
+        <div class="col-12 col-lg-8 px-0">
+          <label class="form-label">{{ '::SitePages:ContactUs.Fields.Email' | abpLocalization }}</label>
+          <input
+            class="form-control"
+            type="email"
+            dir="ltr"
+            [(ngModel)]="email"
+            [class.is-invalid]="showEmailError()"
+            placeholder="name@example.com"
+          />
+          <small class="site-page-field-error" *ngIf="showEmailError()">
+            {{ '::SitePages:ContactUs.Validation.InvalidEmail' | abpLocalization }}
+          </small>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-page-section">
+      <header class="site-page-section__header">
+        <span class="site-page-section__icon"><i class="fa fa-phone"></i></span>
+        <h3 class="site-page-section__title">{{ '::SitePages:ContactUs.Section.Phones' | abpLocalization }}</h3>
+      </header>
+      <div class="site-page-section__body">
+        <div class="row g-3">
+          <div class="col-12 col-lg-8">
+            <label class="form-label">{{ '::SitePages:ContactUs.Fields.Phone' | abpLocalization }}</label>
+            <input
+              class="form-control"
+              type="text"
+              inputmode="numeric"
+              maxlength="9"
+              dir="ltr"
+              spellcheck="false"
+              [(ngModel)]="contactNo"
+              [class.is-invalid]="showPhoneError()"
+              [placeholder]="'::SitePages:ContactUs.Fields.PhonePlaceholder' | abpLocalization"
+            />
+            <small class="site-page-field-error" *ngIf="showPhoneError()">
+              {{ '::SitePages:ContactUs.Validation.InvalidPhone' | abpLocalization }}
+            </small>
+          </div>
+          <div class="col-12 col-lg-4">
+            <label class="form-label d-none d-lg-block" aria-hidden="true">&nbsp;</label>
+            <button type="button" class="btn btn-outline-primary w-100" (click)="addNo()">
+              {{ '::SitePages:ContactUs.Actions.AddNumber' | abpLocalization }}
+            </button>
+          </div>
+          <div class="col-12" *ngIf="contactNos.length">
+            <div class="contact-us-phones">
+              <span class="phone-chip" *ngFor="let phone of contactNos; let i = index">
+                {{ phone }}
+                <button type="button" (click)="removeNo(i)" [attr.aria-label]="'::SitePages:ContactUs.Actions.RemoveNumber' | abpLocalization">
+                  <i class="fi fi-rr-cross-small"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+          <div class="col-12 col-lg-8">
+            <label class="form-label">{{ '::SitePages:ContactUs.Fields.WhatsApp' | abpLocalization }}</label>
+            <input
+              class="form-control"
+              type="text"
+              inputmode="numeric"
+              maxlength="9"
+              dir="ltr"
+              spellcheck="false"
+              [(ngModel)]="whatsApp"
+              [class.is-invalid]="showWhatsAppError()"
+              [placeholder]="'::SitePages:ContactUs.Fields.WhatsAppPlaceholder' | abpLocalization"
+            />
+            <small class="site-page-field-error" *ngIf="showWhatsAppError()">
+              {{ '::SitePages:ContactUs.Validation.InvalidPhone' | abpLocalization }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-page-section">
+      <header class="site-page-section__header">
+        <span class="site-page-section__icon"><i class="fa fa-share-alt"></i></span>
+        <h3 class="site-page-section__title">{{ '::SitePages:ContactUs.Section.Social' | abpLocalization }}</h3>
+      </header>
+      <div class="site-page-section__body">
+        <div class="row g-3">
+          <div class="col-12 col-lg-6">
+            <label class="form-label">{{ '::SitePages:ContactUs.Fields.Twitter' | abpLocalization }}</label>
+            <input
+              class="form-control"
+              type="url"
+              dir="ltr"
+              [(ngModel)]="twitter"
+              [class.is-invalid]="showLinkError('twitter')"
+              placeholder="https://"
+            />
+            <small class="site-page-field-error" *ngIf="showLinkError('twitter')">
+              {{ '::SitePages:ContactUs.Validation.InvalidLink' | abpLocalization }}
+            </small>
+          </div>
+          <div class="col-12 col-lg-6">
+            <label class="form-label">{{ '::SitePages:ContactUs.Fields.Instagram' | abpLocalization }}</label>
+            <input
+              class="form-control"
+              type="url"
+              dir="ltr"
+              [(ngModel)]="instagram"
+              [class.is-invalid]="showLinkError('instagram')"
+              placeholder="https://"
+            />
+            <small class="site-page-field-error" *ngIf="showLinkError('instagram')">
+              {{ '::SitePages:ContactUs.Validation.InvalidLink' | abpLocalization }}
+            </small>
+          </div>
+          <div class="col-12 col-lg-6">
+            <label class="form-label">{{ '::SitePages:ContactUs.Fields.Linkedin' | abpLocalization }}</label>
+            <input
+              class="form-control"
+              type="url"
+              dir="ltr"
+              [(ngModel)]="linkedin"
+              [class.is-invalid]="showLinkError('linkedin')"
+              placeholder="https://"
+            />
+            <small class="site-page-field-error" *ngIf="showLinkError('linkedin')">
+              {{ '::SitePages:ContactUs.Validation.InvalidLink' | abpLocalization }}
+            </small>
+          </div>
+          <div class="col-12 col-lg-6">
+            <label class="form-label">{{ '::SitePages:ContactUs.Fields.Tiktok' | abpLocalization }}</label>
+            <input
+              class="form-control"
+              type="url"
+              dir="ltr"
+              [(ngModel)]="tiktok"
+              [class.is-invalid]="showLinkError('tiktok')"
+              placeholder="https://"
+            />
+            <small class="site-page-field-error" *ngIf="showLinkError('tiktok')">
+              {{ '::SitePages:ContactUs.Validation.InvalidLink' | abpLocalization }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="site-page-form__footer">
+      <button type="button" class="site-page-form__save-btn" (click)="save()" [disabled]="isSaving">
+        <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+        <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+        {{ '::SitePages:Save' | abpLocalization }}
+      </button>
+    </div>
+  </div>
+</div>

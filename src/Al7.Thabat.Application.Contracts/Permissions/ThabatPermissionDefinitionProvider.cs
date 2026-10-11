@@ -23,6 +23,17 @@ public class ThabatPermissionDefinitionProvider : PermissionDefinitionProvider
         crudExamples.AddChild(
             ThabatPermissions.CrudExamples.Delete,
             L("Permission:CrudExamples.Delete"));
+
+        myGroup.AddPermission(
+            ThabatPermissions.SitePages.Default,
+            L("Permission:SitePages"));
+
+        var clients = myGroup.AddPermission(
+            ThabatPermissions.Clients.Default,
+            L("Permission:Clients"));
+        clients.AddChild(ThabatPermissions.Clients.Create, L("Permission:Clients.Create"));
+        clients.AddChild(ThabatPermissions.Clients.Edit, L("Permission:Clients.Edit"));
+        clients.AddChild(ThabatPermissions.Clients.Delete, L("Permission:Clients.Delete"));
     }
 
     private static LocalizableString L(string name)

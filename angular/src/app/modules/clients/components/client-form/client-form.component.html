@@ -1,0 +1,157 @@
+<div class="site-pages-shell" *ngIf="!dialogMode">
+  <header class="site-pages-shell__hero">
+    <nav class="site-pages-shell__breadcrumb" aria-label="breadcrumb">
+      <span>{{ '::Clients:Title' | abpLocalization }}</span>
+      <i class="fa fa-angle-left" aria-hidden="true"></i>
+      <span class="site-pages-shell__breadcrumb-current">
+        {{ (isEditMode ? '::Clients:Edit' : '::Clients:Create') | abpLocalization }}
+      </span>
+    </nav>
+    <div class="site-pages-shell__hero-row">
+      <div>
+        <h1 class="site-pages-shell__title">
+          {{ (isEditMode ? '::Clients:Edit' : '::Clients:Create') | abpLocalization }}
+        </h1>
+        <p class="site-pages-shell__description">{{ '::Clients:FormSubtitle' | abpLocalization }}</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="site-pages-shell__card">
+    <div *ngIf="isLoading" class="site-page-form__loading">
+      <div class="spinner-border" role="status"></div>
+    </div>
+
+    <form class="site-page-form clients-form" *ngIf="!isLoading" [formGroup]="form" (ngSubmit)="save()">
+      <section class="site-page-section">
+        <header class="site-page-section__header">
+          <span class="site-page-section__icon"><i class="fa fa-user"></i></span>
+          <h3 class="site-page-section__title">{{ '::Clients:Profile' | abpLocalization }}</h3>
+        </header>
+        <div class="site-page-section__body">
+          <div class="row g-3">
+            <div class="col-12 col-lg-6">
+              <label class="form-label required">{{ '::Clients:Name' | abpLocalization }}</label>
+              <input class="form-control" type="text" formControlName="name" [class.is-invalid]="showError('name')" />
+              <small class="site-page-field-error" *ngIf="showError('name')">
+                {{ '::Clients:Validation.NameRequired' | abpLocalization }}
+              </small>
+            </div>
+            <div class="col-12 col-lg-6">
+              <label class="form-label required">{{ '::Clients:Email' | abpLocalization }}</label>
+              <input
+                class="form-control"
+                type="email"
+                dir="ltr"
+                formControlName="emailAddress"
+                [class.is-invalid]="showError('emailAddress')"
+                placeholder="name@example.com"
+              />
+              <small class="site-page-field-error" *ngIf="showError('emailAddress')">
+                {{ '::Clients:Validation.InvalidEmail' | abpLocalization }}
+              </small>
+            </div>
+            <div class="col-12 col-lg-6">
+              <label class="form-label required">{{ '::Clients:PhoneNumber' | abpLocalization }}</label>
+              <input
+                class="form-control"
+                type="text"
+                inputmode="numeric"
+                maxlength="9"
+                dir="ltr"
+                spellcheck="false"
+                formControlName="phoneNumber"
+                [class.is-invalid]="showError('phoneNumber')"
+                placeholder="5xxxxxxxx"
+              />
+              <small class="site-page-field-error" *ngIf="showError('phoneNumber')">
+                {{ '::Clients:Validation.InvalidPhone' | abpLocalization }}
+              </small>
+            </div>
+            <div class="col-12 col-lg-6 d-flex align-items-end">
+              <div class="clients-page__active">
+                <label class="form-label mb-0">{{ '::Clients:IsActive' | abpLocalization }}</label>
+                <p-inputSwitch formControlName="isActive"></p-inputSwitch>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="site-page-form__footer">
+        <button type="button" class="clients-page__refresh" (click)="back()" [disabled]="isSaving">
+          {{ '::Clients:Cancel' | abpLocalization }}
+        </button>
+        <button type="submit" class="site-page-form__save-btn" [disabled]="isSaving">
+          <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+          <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+          {{ '::Clients:Save' | abpLocalization }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<form class="site-page-form clients-dialog" *ngIf="dialogMode && !isLoading" [formGroup]="form" (ngSubmit)="save()">
+  <div class="row g-3">
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Clients:Name' | abpLocalization }}</label>
+      <input class="form-control" type="text" formControlName="name" [class.is-invalid]="showError('name')" />
+      <small class="site-page-field-error" *ngIf="showError('name')">
+        {{ '::Clients:Validation.NameRequired' | abpLocalization }}
+      </small>
+    </div>
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Clients:Email' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="email"
+        dir="ltr"
+        formControlName="emailAddress"
+        [class.is-invalid]="showError('emailAddress')"
+        placeholder="name@example.com"
+      />
+      <small class="site-page-field-error" *ngIf="showError('emailAddress')">
+        {{ '::Clients:Validation.InvalidEmail' | abpLocalization }}
+      </small>
+    </div>
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Clients:PhoneNumber' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="text"
+        inputmode="numeric"
+        maxlength="9"
+        dir="ltr"
+        spellcheck="false"
+        formControlName="phoneNumber"
+        [class.is-invalid]="showError('phoneNumber')"
+        placeholder="5xxxxxxxx"
+      />
+      <small class="site-page-field-error" *ngIf="showError('phoneNumber')">
+        {{ '::Clients:Validation.InvalidPhone' | abpLocalization }}
+      </small>
+    </div>
+    <div class="col-12 col-md-6 d-flex align-items-end">
+      <div class="clients-page__active">
+        <label class="form-label mb-0">{{ '::Clients:IsActive' | abpLocalization }}</label>
+        <p-inputSwitch formControlName="isActive"></p-inputSwitch>
+      </div>
+    </div>
+  </div>
+
+  <div class="clients-dialog__footer">
+    <button type="button" class="clients-page__refresh" (click)="back()" [disabled]="isSaving">
+      {{ '::Clients:Cancel' | abpLocalization }}
+    </button>
+    <button type="submit" class="site-page-form__save-btn" [disabled]="isSaving">
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+      <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+      {{ '::Clients:Save' | abpLocalization }}
+    </button>
+  </div>
+</form>
+
+<div *ngIf="dialogMode && isLoading" class="site-page-form__loading">
+  <div class="spinner-border" role="status"></div>
+</div>

@@ -69,7 +69,7 @@ export class GridComponent extends AppComponentBase implements OnInit {
   @Input() isAdvancedFilter: boolean = false;
 
   @Input() actionButtonClass: string = 'aube-btn-outline rounded-circle btn-color-lightblue';
-  @Input() scrollable: boolean;
+  scrollable: boolean = true;
   @Input() responsive: boolean = false;
 
   @Output() filterChanged: EventEmitter<{
@@ -384,11 +384,11 @@ debugger
     return this.rowLoaded[rowKey] || false;
   }
   onStatusChange(col: any, id, value): void {
-
-    if (id && value) {
-      let data: any = { id, value };
-      col.command(data);
+    if (id == null || value === undefined || value === null || !col.command) {
+      return;
     }
+
+    col.command({ id, value });
   }
 
   getRecordKey(): void {
