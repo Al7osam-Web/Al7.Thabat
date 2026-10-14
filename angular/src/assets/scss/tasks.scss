@@ -1,0 +1,46 @@
+.tasks-page,
+.paths-page {
+  .grid-stage-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+
+  .grid-stage-badge.is-stage-7 {
+    color: #15803d;
+    background: #ecfdf3;
+    border-color: #bbf7d0;
+  }
+
+  .grid-stage-badge.is-stage-30 {
+    color: #1d4ed8;
+    background: #eff6ff;
+    border-color: #bfdbfe;
+  }
+
+  .grid-stage-badge.is-stage-90 {
+    color: #b45309;
+    background: #fffbeb;
+    border-color: #fde68a;
+  }
+
+  .p-datatable-tbody > tr:has(.grid-stage-badge.is-stage-7) {
+    background: rgba(34, 197, 94, 0.04);
+  }
+
+  .p-datatable-tbody > tr:has(.grid-stage-badge.is-stage-30) {
+    background: rgba(59, 130, 246, 0.04);
+  }
+
+  .p-datatable-tbody > tr:has(.grid-stage-badge.is-stage-90) {
+    background: rgba(245, 158, 11, 0.05);
+  }
+}

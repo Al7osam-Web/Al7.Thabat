@@ -68,6 +68,7 @@ import { ControlErrorDisplayComponent } from './components/control-error-display
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { GridComponent } from './components/grid/grid.component';
 import { InputImageComponent } from './components/input-image/input-image.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { CustomInputFormComponent } from './components/custom-input-form/custom-input-form.component';
 import { SearableDropdownComponent } from './components/searable-dropdown/searable-dropdown.component';
@@ -162,6 +163,7 @@ const Pipes_Files = [SearchPipe, TimeRemainingPipe, MomentDatePipe, MomentUtcDat
     CustomSearchableDropdownComponent,
     ButtonComponent,
     InputImageComponent,
+    ImageUploadComponent,
     SearableDropdownComponent,
     UserInfoFormComponent,
 
@@ -199,6 +201,7 @@ const Pipes_Files = [SearchPipe, TimeRemainingPipe, MomentDatePipe, MomentUtcDat
     CustomSearchableDropdownComponent,
     ButtonComponent,
     InputImageComponent,
+    ImageUploadComponent,
     SearableDropdownComponent,
     ReactiveFormsModule,
     UserInfoFormComponent,

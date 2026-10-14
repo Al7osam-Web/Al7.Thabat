@@ -1,0 +1,122 @@
+<div class="site-pages-shell books-page tasks-page">
+  <header class="site-pages-shell__hero">
+    <nav class="site-pages-shell__breadcrumb" aria-label="breadcrumb">
+      <span>{{ '::Menu:Home' | abpLocalization }}</span>
+      <i class="fa fa-angle-left" aria-hidden="true"></i>
+      <span class="site-pages-shell__breadcrumb-current">{{ '::Tasks:Title' | abpLocalization }}</span>
+    </nav>
+    <div class="site-pages-shell__hero-row">
+      <div>
+        <h1 class="site-pages-shell__title">{{ '::Tasks:Title' | abpLocalization }}</h1>
+        <p class="site-pages-shell__description">{{ '::Tasks:Subtitle' | abpLocalization }}</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="books-page__toolbar">
+    <button
+      *abpPermission="'Thabat.Tasks.Create'"
+      type="button"
+      class="site-page-form__save-btn"
+      (click)="openCreate()"
+    >
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      {{ '::Tasks:Create' | abpLocalization }}
+    </button>
+    <button type="button" class="books-page__refresh" (click)="getRecords()" [disabled]="loader">
+      <i class="fa fa-refresh" aria-hidden="true"></i>
+      {{ '::Tasks:Refresh' | abpLocalization }}
+    </button>
+  </div>
+
+  <section class="books-stats" [attr.aria-label]="'::Tasks:Stats' | abpLocalization">
+    <article class="books-stat-card is-total">
+      <div class="books-stat-card__icon">
+        <i class="fa fa-tasks" aria-hidden="true"></i>
+      </div>
+      <div class="books-stat-card__body">
+        <span class="books-stat-card__label">{{ '::Tasks:StatsTotal' | abpLocalization }}</span>
+        <strong class="books-stat-card__value">{{ stats.totalTasks }}</strong>
+      </div>
+    </article>
+
+    <article class="books-stat-card is-available">
+      <div class="books-stat-card__icon">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+      </div>
+      <div class="books-stat-card__body">
+        <span class="books-stat-card__label">{{ '::Tasks:StatsSevenDays' | abpLocalization }}</span>
+        <strong class="books-stat-card__value">{{ stats.sevenDaysCount }}</strong>
+      </div>
+    </article>
+
+    <article class="books-stat-card is-free">
+      <div class="books-stat-card__icon">
+        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+      </div>
+      <div class="books-stat-card__body">
+        <span class="books-stat-card__label">{{ '::Tasks:StatsThirtyDays' | abpLocalization }}</span>
+        <strong class="books-stat-card__value">{{ stats.thirtyDaysCount }}</strong>
+      </div>
+    </article>
+
+    <article class="books-stat-card is-relapse">
+      <div class="books-stat-card__icon">
+        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+      </div>
+      <div class="books-stat-card__body">
+        <span class="books-stat-card__label">{{ '::Tasks:StatsNinetyDays' | abpLocalization }}</span>
+        <strong class="books-stat-card__value">{{ stats.ninetyDaysCount }}</strong>
+      </div>
+    </article>
+  </section>
+
+  <div class="site-pages-shell__card">
+    <div *ngIf="isLoading" class="site-page-form__loading">
+      <div class="spinner-border" role="status"></div>
+    </div>
+
+    <msn-grid
+      *ngIf="!isLoading"
+      [data]="dataList"
+      [isDataInput]="false"
+      [columns]="tableColumns"
+      [actions]="tableActions"
+      [pageSize]="fillter.pagination.pageSize"
+      [totalRecordsLength]="fillter.pagination.totalCount"
+      [pageIndex]="fillter.pagination.pageIndex"
+      (pageIndexChange)="onPageIndexChange($event)"
+      (pageSizeChange)="onPageSizeChange($event)"
+      [paginator]="(fillter.pagination.totalCount || 0) > (fillter.pagination.pageSize || 10)"
+      [loading]="loader"
+      [scrollable]="false"
+      [moduleTitle]="'::Tasks:Total' | abpLocalization"
+      [isRowClickable]="false"
+      (rowClicked)="openEdit($event)"
+      (sortChanged)="onSortChanged($event)"
+      (filterChanged)="onFilterChanged($event)"
+      (dataChanged)="onDataChanged($event)"
+    ></msn-grid>
+  </div>
+</div>
+
+<p-confirmDialog [style]="{ width: 'min(440px, 92vw)' }"></p-confirmDialog>
+
+<p-dialog
+  [header]="(editingTaskId ? '::Tasks:Edit' : '::Tasks:Create') | abpLocalization"
+  [(visible)]="dialogVisible"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: 'min(920px, 96vw)' }"
+  [contentStyle]="{ overflow: 'auto', maxHeight: 'min(70vh, 720px)' }"
+  styleClass="books-create-dialog"
+>
+  <app-task-form
+    *ngIf="dialogVisible"
+    [dialogMode]="true"
+    [taskId]="editingTaskId"
+    (saved)="onTaskSaved()"
+    (cancelled)="dialogVisible = false"
+  ></app-task-form>
+</p-dialog>

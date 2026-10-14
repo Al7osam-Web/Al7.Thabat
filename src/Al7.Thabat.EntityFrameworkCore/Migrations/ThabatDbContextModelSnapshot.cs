@@ -102,9 +102,14 @@ namespace Al7.Thabat.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("LastModifierId");
 
+                    b.Property<int>("Sort")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
+
+                    b.HasIndex("BookId", "Sort");
 
                     b.ToTable("BooksMedia", (string)null);
                 });
@@ -246,6 +251,133 @@ namespace Al7.Thabat.Migrations
                     b.ToTable("AppCrudExamples", (string)null);
                 });
 
+            modelBuilder.Entity("Al7.Thabat.Faqs.Faq", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("DescriptionAr")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<int>("Sort")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TitleAr")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("TitleEn")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Sort")
+                        .IsUnique();
+
+                    b.ToTable("Faqs", (string)null);
+                });
+
+            modelBuilder.Entity("Al7.Thabat.Paths.PathDay", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<int>("Day")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<int>("Stage")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Stage", "Day")
+                        .IsUnique();
+
+                    b.ToTable("PathDay", (string)null);
+                });
+
+            modelBuilder.Entity("Al7.Thabat.Paths.PathEntry", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("DescriptionAr")
+                        .IsRequired()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<long>("PathDayId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Section")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sort")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PathDayId");
+
+                    b.HasIndex("PathDayId", "Section", "Sort")
+                        .IsUnique();
+
+                    b.ToTable("PathEntry", (string)null);
+                });
+
             modelBuilder.Entity("Al7.Thabat.SitePages.SitePage", b =>
                 {
                     b.Property<long>("Id")
@@ -284,6 +416,73 @@ namespace Al7.Thabat.Migrations
                     b.ToTable("AppSitePages", (string)null);
                 });
 
+            modelBuilder.Entity("Al7.Thabat.Subscriptions.SubscriptionPackage", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("BilledPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("DescriptionAr")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NameEn")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<decimal>("OriginalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Sort")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Period")
+                        .IsUnique();
+
+                    b.ToTable("SubscriptionPackages", (string)null);
+                });
+
             modelBuilder.Entity("Al7.Thabat.Surveys.SurveyAnswer", b =>
                 {
                     b.Property<long>("Id")
@@ -292,8 +491,8 @@ namespace Al7.Thabat.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("Degree")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Degree")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Sort")
                         .HasColumnType("int");
@@ -2198,6 +2397,17 @@ namespace Al7.Thabat.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Al7.Thabat.Paths.PathEntry", b =>
+                {
+                    b.HasOne("Al7.Thabat.Paths.PathDay", "PathDay")
+                        .WithMany("Entries")
+                        .HasForeignKey("PathDayId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PathDay");
+                });
+
             modelBuilder.Entity("Al7.Thabat.Surveys.SurveyAnswer", b =>
                 {
                     b.HasOne("Al7.Thabat.Surveys.SurveyQuestion", "SurveyQuestion")
@@ -2373,6 +2583,11 @@ namespace Al7.Thabat.Migrations
             modelBuilder.Entity("Al7.Thabat.Books.Book", b =>
                 {
                     b.Navigation("Media");
+                });
+
+            modelBuilder.Entity("Al7.Thabat.Paths.PathDay", b =>
+                {
+                    b.Navigation("Entries");
                 });
 
             modelBuilder.Entity("Al7.Thabat.Surveys.SurveyQuestion", b =>

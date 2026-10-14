@@ -1,0 +1,69 @@
+<form
+  class="site-page-form books-dialog"
+  *ngIf="!isLoading"
+  [formGroup]="form"
+  (ngSubmit)="save()"
+>
+  <div class="row g-3">
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Faqs:TitleAr' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="titleAr"
+        [class.is-invalid]="showError('titleAr')"
+      />
+      <small class="site-page-field-error" *ngIf="showError('titleAr')">
+        {{ '::Faqs:Validation.TitleArRequired' | abpLocalization }}
+      </small>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label">{{ '::Faqs:TitleEn' | abpLocalization }}</label>
+      <input class="form-control" type="text" formControlName="titleEn" dir="ltr" />
+    </div>
+
+    <div class="col-12 col-md-4">
+      <label class="form-label required">{{ '::Faqs:Sort' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="number"
+        min="1"
+        formControlName="sort"
+        [class.is-invalid]="showError('sort')"
+      />
+      <small class="site-page-field-error" *ngIf="showError('sort')">
+        {{ '::Faqs:Validation.SortRequired' | abpLocalization }}
+      </small>
+    </div>
+
+    <div class="col-12">
+      <label class="form-label required">{{ '::Faqs:DescriptionAr' | abpLocalization }}</label>
+      <textarea
+        class="form-control"
+        rows="4"
+        formControlName="descriptionAr"
+        [class.is-invalid]="showError('descriptionAr')"
+      ></textarea>
+      <small class="site-page-field-error" *ngIf="showError('descriptionAr')">
+        {{ '::Faqs:Validation.DescriptionArRequired' | abpLocalization }}
+      </small>
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">{{ '::Faqs:DescriptionEn' | abpLocalization }}</label>
+      <textarea class="form-control" rows="4" formControlName="descriptionEn" dir="ltr"></textarea>
+    </div>
+  </div>
+
+  <div class="books-dialog__footer">
+    <button type="button" class="books-page__refresh" (click)="back()" [disabled]="isSaving">
+      {{ '::Faqs:Cancel' | abpLocalization }}
+    </button>
+    <button type="submit" class="site-page-form__save-btn" [disabled]="isSaving">
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+      <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+      {{ '::Faqs:Save' | abpLocalization }}
+    </button>
+  </div>
+</form>

@@ -1,9 +1,12 @@
 using Al7.Thabat.Books;
 using Al7.Thabat.Clients;
 using Al7.Thabat.CrudExamples;
+using Al7.Thabat.Faqs;
+using Al7.Thabat.Paths;
 using Al7.Thabat.EntityFrameworkCore.CrudExamples;
 using Al7.Thabat.EntityFrameworkCore.SitePages;
 using Al7.Thabat.SitePages;
+using Al7.Thabat.Subscriptions;
 using Al7.Thabat.Surveys;
 using Al7.Thabat.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +49,14 @@ public class ThabatDbContext :
     public DbSet<Book> Books { get; set; }
 
     public DbSet<BookMedia> BooksMedia { get; set; }
+
+    public DbSet<SubscriptionPackage> SubscriptionPackages { get; set; }
+
+    public DbSet<Faq> Faqs { get; set; }
+
+    public DbSet<PathDay> PathDays { get; set; }
+
+    public DbSet<PathEntry> PathEntries { get; set; }
 
 
     #region Entities from the modules
@@ -115,6 +126,7 @@ public class ThabatDbContext :
             b.ConfigureByConvention();
             b.Property(x => x.TitleAr).HasMaxLength(512);
             b.Property(x => x.TitleEn).HasMaxLength(512);
+            b.Property(x => x.Degree).HasColumnType("decimal(18,2)");
             b.HasIndex(x => x.SurveyQuestionId);
         });
 
@@ -182,6 +194,58 @@ public class ThabatDbContext :
             b.ConfigureByConvention();
             b.Property(x => x.FilePath).HasMaxLength(500);
             b.HasIndex(x => x.BookId);
+            b.HasIndex(x => new { x.BookId, x.Sort });
+        });
+
+        builder.Entity<SubscriptionPackage>(b =>
+        {
+            b.ToTable("SubscriptionPackages");
+            b.ConfigureByConvention();
+            b.Property(x => x.NameAr).IsRequired().HasMaxLength(256);
+            b.Property(x => x.NameEn).HasMaxLength(256);
+            b.Property(x => x.DescriptionAr).HasMaxLength(512);
+            b.Property(x => x.DescriptionEn).HasMaxLength(512);
+            b.Property(x => x.Period).IsRequired();
+            b.Property(x => x.Price).HasColumnType("decimal(18,2)");
+            b.Property(x => x.BilledPrice).HasColumnType("decimal(18,2)");
+            b.Property(x => x.OriginalPrice).HasColumnType("decimal(18,2)");
+            b.HasIndex(x => x.Period).IsUnique();
+        });
+
+        builder.Entity<Faq>(b =>
+        {
+            b.ToTable("Faqs");
+            b.ConfigureByConvention();
+            b.Property(x => x.TitleAr).IsRequired().HasMaxLength(256);
+            b.Property(x => x.TitleEn).HasMaxLength(256);
+            b.Property(x => x.DescriptionAr).IsRequired().HasMaxLength(2000);
+            b.Property(x => x.DescriptionEn).HasMaxLength(2000);
+            b.HasIndex(x => x.Sort).IsUnique();
+        });
+
+        builder.Entity<PathDay>(b =>
+        {
+            b.ToTable("PathDay");
+            b.ConfigureByConvention();
+            b.Property(x => x.Stage).IsRequired();
+            b.Property(x => x.Day).IsRequired();
+            b.HasIndex(x => new { x.Stage, x.Day }).IsUnique();
+            b.HasMany(x => x.Entries)
+                .WithOne(x => x.PathDay)
+                .HasForeignKey(x => x.PathDayId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        builder.Entity<PathEntry>(b =>
+        {
+            b.ToTable("PathEntry");
+            b.ConfigureByConvention();
+            b.Property(x => x.Section).IsRequired();
+            b.Property(x => x.DescriptionAr).IsRequired().HasMaxLength(4000);
+            b.Property(x => x.DescriptionEn).HasMaxLength(4000);
+            b.Property(x => x.Sort).IsRequired();
+            b.HasIndex(x => x.PathDayId);
+            b.HasIndex(x => new { x.PathDayId, x.Section, x.Sort }).IsUnique();
         });
     }
 }

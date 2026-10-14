@@ -14,4 +14,5 @@ public class BookMedia : AuditedEntity<long>
     [ForeignKey("BookId")]
     public virtual Book? Book { get; set; }
     public virtual string? FilePath { get; set; }
+    public virtual int Sort { get; set; }
 }

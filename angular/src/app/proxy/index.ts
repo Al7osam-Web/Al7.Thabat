@@ -1,4 +1,11 @@
+import * as Books from './books';
 import * as Clients from './clients';
 import * as CrudExamples from './crud-examples';
+import * as Faqs from './faqs';
+import * as Media from './media';
+import * as Paths from './paths';
 import * as SitePages from './site-pages';
-export { Clients, CrudExamples, SitePages };
+import * as Subscriptions from './subscriptions';
+import * as Surveys from './surveys';
+import * as Tasks from './tasks';
+export { Books, Clients, CrudExamples, Faqs, Media, Paths, SitePages, Subscriptions, Surveys, Tasks };

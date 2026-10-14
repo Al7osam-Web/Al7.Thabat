@@ -6,7 +6,7 @@ import { AppComponentBase } from 'src/app/shared/app-component-base';
 import { TableHeaderType } from 'src/app/sharedFeatures/enum/table/table-header-type';
 import { ITableHeader } from 'src/app/sharedFeatures/models/itable-header';
 import { Pagination } from 'src/app/sharedFeatures/models/pagination.model';
-import { ClientsApiService } from '../../services/clients-api.service';
+import { ClientsService } from 'src/app/proxy/clients';
 
 @Component({
   selector: 'app-clients-list',
@@ -25,7 +25,7 @@ export class ClientsListComponent extends AppComponentBase implements OnInit {
 
   constructor(
     injector: Injector,
-    private readonly clientsApi: ClientsApiService,
+    private readonly clientsService: ClientsService,
     private readonly toaster: ToasterService,
     private readonly cdr: ChangeDetectorRef
   ) {
@@ -77,14 +77,6 @@ export class ClientsListComponent extends AppComponentBase implements OnInit {
           [this.l('Clients:Inactive')]: false,
         },
       },
-      {
-        field: 'creationTime',
-        name: this.l('Clients:CreationTime'),
-        type: TableHeaderType.Date,
-        alwaysVisible: true,
-        removeFlitter: true,
-        minWidth: '180px',
-      },
     ];
   }
 
@@ -130,7 +122,7 @@ export class ClientsListComponent extends AppComponentBase implements OnInit {
     }
 
     const previous = !event.value;
-    this.clientsApi
+    this.clientsService
       .update(event.id, {
         name: client.name ?? '',
         emailAddress: client.emailAddress ?? '',
@@ -158,7 +150,7 @@ export class ClientsListComponent extends AppComponentBase implements OnInit {
     const pageIndex = this.fillter?.pagination?.pageIndex ?? 0;
     const pageSize = this.fillter?.pagination?.pageSize ?? 10;
 
-    this.clientsApi
+    this.clientsService
       .getPaged({
         skipCount: pageIndex * pageSize,
         maxResultCount: pageSize,
@@ -225,7 +217,7 @@ export class ClientsListComponent extends AppComponentBase implements OnInit {
     if (!isConfirmed) return;
 
     this.loader = true;
-    this.clientsApi.delete(client.id).subscribe({
+    this.clientsService.delete(client.id).subscribe({
       next: () => {
         this.toaster.success(this.l('Clients:Deleted'));
         this.getRecords();

@@ -1,0 +1,75 @@
+<form
+  class="site-page-form books-dialog"
+  *ngIf="!isLoading"
+  [formGroup]="form"
+  (ngSubmit)="save()"
+>
+  <div class="row g-3">
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Tasks:Stage' | abpLocalization }}</label>
+      <select class="form-select" formControlName="stage" [class.is-invalid]="showError('stage')">
+        <option *ngFor="let option of stageOptions" [ngValue]="option.value">
+          {{ ('::' + option.labelKey) | abpLocalization }}
+        </option>
+      </select>
+      <small class="site-page-field-error" *ngIf="showError('stage')">
+        {{ '::Tasks:Validation.StageRequired' | abpLocalization }}
+      </small>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Tasks:Day' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="number"
+        min="1"
+        [max]="maxDay"
+        formControlName="day"
+        [class.is-invalid]="showError('day')"
+      />
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Tasks:TitleAr' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="titleAr"
+        [class.is-invalid]="showError('titleAr')"
+      />
+      <small class="site-page-field-error" *ngIf="showError('titleAr')">
+        {{ '::Tasks:Validation.TitleArRequired' | abpLocalization }}
+      </small>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label">{{ '::Tasks:TitleEn' | abpLocalization }}</label>
+      <input class="form-control" type="text" formControlName="titleEn" dir="ltr" />
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label">{{ '::Tasks:SubTitleAr' | abpLocalization }}</label>
+      <input class="form-control" type="text" formControlName="subTitleAr" />
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label">{{ '::Tasks:SubTitleEn' | abpLocalization }}</label>
+      <input class="form-control" type="text" formControlName="subTitleEn" dir="ltr" />
+    </div>
+  </div>
+
+  <div class="books-dialog__footer">
+    <button type="button" class="books-page__refresh" (click)="back()" [disabled]="isSaving">
+      {{ '::Tasks:Cancel' | abpLocalization }}
+    </button>
+    <button type="submit" class="site-page-form__save-btn" [disabled]="isSaving">
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+      <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+      {{ '::Tasks:Save' | abpLocalization }}
+    </button>
+  </div>
+</form>
+
+<div *ngIf="isLoading" class="site-page-form__loading">
+  <div class="spinner-border" role="status"></div>
+</div>

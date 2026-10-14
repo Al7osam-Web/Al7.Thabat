@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { finalize } from 'rxjs/operators';
 import { AppComponentBase } from 'src/app/shared/app-component-base';
-import { ClientsApiService } from '../../services/clients-api.service';
+import { ClientsService } from 'src/app/proxy/clients';
 
 @Component({
   selector: 'app-client-form',
@@ -27,7 +27,7 @@ export class ClientFormComponent extends AppComponentBase implements OnInit {
     private readonly fb: FormBuilder,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly clientsApi: ClientsApiService,
+    private readonly clientsService: ClientsService,
     private readonly toaster: ToasterService
   ) {
     super(injector);
@@ -63,7 +63,7 @@ export class ClientFormComponent extends AppComponentBase implements OnInit {
 
   load(): void {
     this.isLoading = true;
-    this.clientsApi
+    this.clientsService
       .get(this.clientId)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
@@ -97,8 +97,8 @@ export class ClientFormComponent extends AppComponentBase implements OnInit {
 
     this.isSaving = true;
     const request = this.isEditMode
-      ? this.clientsApi.update(this.clientId, input)
-      : this.clientsApi.create(input);
+      ? this.clientsService.update(this.clientId, input)
+      : this.clientsService.create(input);
 
     request.pipe(finalize(() => (this.isSaving = false))).subscribe({
       next: () => {

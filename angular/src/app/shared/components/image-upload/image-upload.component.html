@@ -1,0 +1,47 @@
+<div class="image-upload">
+  <div class="preview-container" *ngIf="hasImage">
+    <video
+      *ngIf="showVideoElement"
+      class="preview-image"
+      [src]="previewUrl"
+      controls
+      preload="metadata"
+    ></video>
+    <div class="preview-file" *ngIf="showVideoPlaceholder">
+      <i class="fa fa-video-camera preview-file__icon"></i>
+      <span class="preview-file__name">{{ selectedFileName || chooseLabel || ('::ChoosePhoto' | abpLocalization) }}</span>
+    </div>
+    <img [src]="previewUrl" *ngIf="showImagePreview" alt="Preview" class="preview-image" />
+    <div class="preview-file" *ngIf="showPdfPreview">
+      <i class="fa fa-file-pdf-o preview-file__icon"></i>
+      <span class="preview-file__name">{{ selectedFileName || 'PDF' }}</span>
+    </div>
+    <div class="preview-file" *ngIf="showFilePlaceholder">
+      <i class="fa fa-file-o preview-file__icon"></i>
+      <span class="preview-file__name">{{ selectedFileName }}</span>
+    </div>
+    <button type="button" class="remove-button" (click)="removeImage()" *ngIf="isNewImage">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+
+  <div class="upload-button-container">
+    <input
+      type="file"
+      [id]="'fileInput_' + controlName"
+      [accept]="accept"
+      (change)="onFileSelected($event)"
+      style="display: none"
+    />
+    <button type="button" class="upload-button" (click)="triggerFileInput()">
+      <i class="fa fa-cloud-upload"></i>
+      <span>
+        {{
+          hasImage
+            ? changeLabel || ('::ChoosePhoto' | abpLocalization)
+            : chooseLabel || ('::ChoosePhoto' | abpLocalization)
+        }}
+      </span>
+    </button>
+  </div>
+</div>

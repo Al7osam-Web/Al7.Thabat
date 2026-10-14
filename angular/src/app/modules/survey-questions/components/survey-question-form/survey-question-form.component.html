@@ -1,0 +1,111 @@
+<form
+  class="site-page-form books-dialog"
+  *ngIf="!isLoading"
+  [formGroup]="form"
+  (ngSubmit)="save()"
+>
+  <div class="row g-3">
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::SurveyQuestions:TitleAr' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="titleAr"
+        [class.is-invalid]="showError('titleAr')"
+      />
+      <small class="site-page-field-error" *ngIf="showError('titleAr')">
+        {{ '::SurveyQuestions:Validation.TitleArRequired' | abpLocalization }}
+      </small>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label">{{ '::SurveyQuestions:TitleEn' | abpLocalization }}</label>
+      <input class="form-control" type="text" formControlName="titleEn" dir="ltr" />
+    </div>
+
+    <div class="col-12 col-md-4">
+      <label class="form-label required">{{ '::SurveyQuestions:Sort' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="number"
+        min="1"
+        formControlName="sort"
+        [class.is-invalid]="showError('sort')"
+      />
+      <small class="site-page-field-error" *ngIf="showError('sort')">
+        {{ '::SurveyQuestions:Validation.SortRequired' | abpLocalization }}
+      </small>
+    </div>
+  </div>
+
+  <div class="survey-answers" formArrayName="answers">
+    <div class="survey-answers__header">
+      <h3>{{ '::SurveyQuestions:Answers' | abpLocalization }}</h3>
+      <button type="button" class="books-page__refresh" (click)="addAnswer()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        {{ '::SurveyQuestions:AddAnswer' | abpLocalization }}
+      </button>
+    </div>
+
+    <div
+      class="survey-answers__card"
+      *ngFor="let answer of answers.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div class="survey-answers__card-top">
+        <span class="survey-answers__index">{{ i + 1 }}</span>
+        <div class="survey-answers__actions">
+          <button type="button" class="books-page__refresh" (click)="moveAnswer(i, -1)" [disabled]="i === 0">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            class="books-page__refresh"
+            (click)="moveAnswer(i, 1)"
+            [disabled]="i === answers.length - 1"
+          >
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="books-page__refresh" (click)="removeAnswer(i)">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <label class="form-label required">{{ '::SurveyQuestions:AnswerTitleAr' | abpLocalization }}</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="titleAr"
+            [class.is-invalid]="showAnswerError(i, 'titleAr')"
+          />
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="form-label">{{ '::SurveyQuestions:AnswerTitleEn' | abpLocalization }}</label>
+          <input class="form-control" type="text" formControlName="titleEn" dir="ltr" />
+        </div>
+        <div class="col-12 col-md-4">
+          <label class="form-label required">{{ '::SurveyQuestions:Degree' | abpLocalization }}</label>
+          <input class="form-control" type="number" step="0.01" formControlName="degree" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="books-dialog__footer">
+    <button type="button" class="books-page__refresh" (click)="back()" [disabled]="isSaving">
+      {{ '::SurveyQuestions:Cancel' | abpLocalization }}
+    </button>
+    <button type="submit" class="site-page-form__save-btn" [disabled]="isSaving">
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+      <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+      {{ '::SurveyQuestions:Save' | abpLocalization }}
+    </button>
+  </div>
+</form>
+
+<div *ngIf="isLoading" class="site-page-form__loading">
+  <div class="spinner-border" role="status"></div>
+</div>

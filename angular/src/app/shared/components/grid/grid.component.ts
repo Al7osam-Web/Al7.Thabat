@@ -521,7 +521,12 @@ debugger
         alwaysVisible: true,
       },
     ];
-    this.columns = [...this.columns, ...userColumns];
+
+    const existingFields = new Set(this.columns.map(column => column.field));
+    const columnsToAdd = userColumns.filter(
+      column => !!column.field?.trim() && !existingFields.has(column.field)
+    );
+    this.columns = [...this.columns, ...columnsToAdd];
   }
 
   listeningGroupingMenu(): void {
@@ -567,9 +572,21 @@ debugger
     if (!maybeUrl) {
       return null;
     }
+    return this.buildMediaUrl(maybeUrl);
+  }
+
+  buildMediaUrl(path?: string | null): string {
+    if (!path) {
+      return '';
+    }
+
+    if (path.startsWith('http') || path.startsWith('blob:') || path.startsWith('data:')) {
+      return path;
+    }
+
     const prefix = this.backendUrl ?? '';
     const normalizedPrefix = prefix.endsWith('/') ? prefix.slice(0, -1) : prefix;
-    return maybeUrl.startsWith('http') ? maybeUrl : `${normalizedPrefix}${maybeUrl}`;
+    return `${normalizedPrefix}/${path.replace(/^\//, '')}`;
   }
 
 }

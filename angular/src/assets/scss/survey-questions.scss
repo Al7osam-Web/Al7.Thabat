@@ -1,0 +1,58 @@
+.survey-questions-page {
+  .books-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.survey-answers {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 900;
+      color: #1f2f3e;
+    }
+  }
+
+  &__card {
+    padding: 14px;
+    border: 1px solid #e8ecf3;
+    border-radius: 14px;
+    background: #fbfcfe;
+  }
+
+  &__card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  &__index {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(128, 101, 242, 0.14);
+    color: #6d4ad4;
+    font-weight: 900;
+  }
+
+  &__actions {
+    display: inline-flex;
+    gap: 8px;
+  }
+}

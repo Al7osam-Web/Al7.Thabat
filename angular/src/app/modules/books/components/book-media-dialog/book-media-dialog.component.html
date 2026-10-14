@@ -1,0 +1,127 @@
+<div class="books-media-dialog" *ngIf="!isLoading">
+  <div class="books-media-dialog__top">
+    <div class="books-media-dialog__meta" *ngIf="book">
+      <span class="books-media-dialog__meta-label">{{ '::Books:Media' | abpLocalization }}</span>
+      <strong>{{ book.nameAr || book.nameEn }}</strong>
+    </div>
+
+    <button
+      type="button"
+      class="books-media-dialog__add-btn"
+      (click)="mediaFileInput.click()"
+      [disabled]="isUploading || isPersisting"
+    >
+      <span *ngIf="isUploading" class="spinner-border spinner-border-sm"></span>
+      <i *ngIf="!isUploading" class="fa fa-plus" aria-hidden="true"></i>
+      {{ '::Books:AddMediaMultiple' | abpLocalization }}
+    </button>
+    <input
+      #mediaFileInput
+      type="file"
+      multiple
+      accept="image/jpeg,image/png,image/webp,image/*"
+      hidden
+      (change)="onMediaFilesSelected($event)"
+    />
+  </div>
+
+  <p class="books-media-dialog__upload-hint">
+    {{ '::Books:MediaUploadHint' | abpLocalization }}
+  </p>
+
+  <div class="books-media-dialog__hint">
+    <i class="fa fa-list-ol" aria-hidden="true"></i>
+    <span>{{ '::Books:MediaSortHint' | abpLocalization }}</span>
+  </div>
+
+  <div class="books-media__empty" *ngIf="!mediaItems.length">
+    {{ '::Books:MediaEmpty' | abpLocalization }}
+  </div>
+
+  <div class="books-media__grid" *ngIf="mediaItems.length">
+    <div
+      class="books-media__card"
+      *ngFor="let item of mediaItems; let i = index; trackBy: trackByMediaKey"
+      [class.is-cover]="isCover(item)"
+    >
+      <div class="books-media__preview">
+        <span class="books-media__sort">{{ item.sort }}</span>
+        <img
+          *ngIf="getMediaUrl(item) as mediaUrl"
+          [src]="mediaUrl"
+          alt=""
+          class="books-media__image"
+        />
+        <div class="books-media__file" *ngIf="!getMediaUrl(item)">
+          <i class="fa fa-file-image-o" aria-hidden="true"></i>
+          <span>{{ item.path || ('::Books:Uploading' | abpLocalization) }}</span>
+        </div>
+        <div class="books-media__overlay" *ngIf="item.uploading">
+          <span class="spinner-border spinner-border-sm"></span>
+        </div>
+      </div>
+
+      <div class="books-media__toolbar">
+        <button
+          type="button"
+          class="books-media__cover-btn"
+          (click)="setAsCover(item)"
+          [disabled]="item.uploading || isPersisting || isCover(item)"
+        >
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <span>
+            {{
+              (isCover(item) ? '::Books:CurrentCover' : '::Books:SetAsCover') | abpLocalization
+            }}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="books-media__remove"
+          (click)="removeMedia(i)"
+          [disabled]="item.uploading || isPersisting"
+          [attr.aria-label]="'::Books:RemoveMedia' | abpLocalization"
+        >
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+
+        <div class="books-media__reorder">
+          <button
+            type="button"
+            class="books-media__move"
+            (click)="moveUp(i, $event)"
+            [disabled]="i === 0 || item.uploading || isPersisting"
+            [attr.aria-label]="'::Books:MoveUp' | abpLocalization"
+          >
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            class="books-media__move"
+            (click)="moveDown(i, $event)"
+            [disabled]="i === mediaItems.length - 1 || item.uploading || isPersisting"
+            [attr.aria-label]="'::Books:MoveDown' | abpLocalization"
+          >
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="books-dialog__footer">
+    <button
+      type="button"
+      class="books-page__refresh"
+      (click)="close()"
+      [disabled]="isUploading || isPersisting"
+    >
+      {{ '::Books:Close' | abpLocalization }}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="site-page-form__loading">
+  <div class="spinner-border" role="status"></div>
+</div>

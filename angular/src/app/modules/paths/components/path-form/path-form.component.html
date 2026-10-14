@@ -1,0 +1,110 @@
+<form
+  class="site-page-form books-dialog"
+  *ngIf="!isLoading"
+  [formGroup]="form"
+  (ngSubmit)="save()"
+>
+  <div class="row g-3">
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Paths:Stage' | abpLocalization }}</label>
+      <select class="form-select" formControlName="stage" [class.is-invalid]="showError('stage')">
+        <option *ngFor="let option of stageOptions" [ngValue]="option.value">
+          {{ ('::' + option.labelKey) | abpLocalization }}
+        </option>
+      </select>
+      <small class="site-page-field-error" *ngIf="showError('stage')">
+        {{ '::Paths:Validation.StageRequired' | abpLocalization }}
+      </small>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Paths:Day' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="number"
+        min="1"
+        [max]="maxDay"
+        formControlName="day"
+        [class.is-invalid]="showError('day')"
+      />
+      <small class="site-page-field-error" *ngIf="showError('day')">
+        {{ '::Paths:Validation.DayRequired' | abpLocalization }}
+      </small>
+    </div>
+  </div>
+
+  <div class="survey-answers" *ngFor="let section of sections" [formArrayName]="section.key">
+    <div class="survey-answers__header">
+      <h3>{{ ('::' + section.titleKey) | abpLocalization }}</h3>
+      <button type="button" class="books-page__refresh" (click)="addItem(section.key)">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        {{ '::Paths:AddItem' | abpLocalization }}
+      </button>
+    </div>
+
+    <div
+      class="survey-answers__card"
+      *ngFor="let item of sectionArray(section.key).controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div class="survey-answers__card-top">
+        <span class="survey-answers__index">{{ i + 1 }}</span>
+        <div class="survey-answers__actions">
+          <button type="button" class="books-page__refresh" (click)="moveItem(section.key, i, -1)" [disabled]="i === 0">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            class="books-page__refresh"
+            (click)="moveItem(section.key, i, 1)"
+            [disabled]="i === sectionArray(section.key).length - 1"
+          >
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            class="books-page__refresh"
+            (click)="removeItem(section.key, i)"
+            [disabled]="sectionArray(section.key).length <= 1"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-12">
+          <label class="form-label required">{{ '::Paths:DescriptionAr' | abpLocalization }}</label>
+          <textarea
+            class="form-control"
+            rows="3"
+            formControlName="descriptionAr"
+            [class.is-invalid]="showItemError(section.key, i, 'descriptionAr')"
+          ></textarea>
+          <small class="site-page-field-error" *ngIf="showItemError(section.key, i, 'descriptionAr')">
+            {{ '::Paths:Validation.DescriptionArRequired' | abpLocalization }}
+          </small>
+        </div>
+        <div class="col-12">
+          <label class="form-label">{{ '::Paths:DescriptionEn' | abpLocalization }}</label>
+          <textarea class="form-control" rows="3" formControlName="descriptionEn" dir="ltr"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="books-dialog__footer">
+    <button type="button" class="books-page__refresh" (click)="back()" [disabled]="isSaving">
+      {{ '::Paths:Cancel' | abpLocalization }}
+    </button>
+    <button type="submit" class="site-page-form__save-btn" [disabled]="isSaving">
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+      <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+      {{ '::Paths:Save' | abpLocalization }}
+    </button>
+  </div>
+</form>
+
+<div *ngIf="isLoading" class="site-page-form__loading">
+  <div class="spinner-border" role="status"></div>
+</div>

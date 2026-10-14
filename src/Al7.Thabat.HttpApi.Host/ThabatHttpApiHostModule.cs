@@ -253,6 +253,7 @@ public class ThabatHttpApiHostModule : AbpModule
         app.UseRouting();
         app.UseAbpSecurityHeaders();
         app.UseCors();
+        app.UseStaticFiles();
         app.UseAuthentication();
         app.UseAbpOpenIddictValidation();
 

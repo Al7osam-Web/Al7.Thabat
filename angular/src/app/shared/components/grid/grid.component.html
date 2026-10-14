@@ -371,7 +371,7 @@
                   class="spinner-loading"
                 >
                   <div
-                    *ngIf="col.extraData?.asSwitch; else statusDropdown"
+                    *ngIf="col.extraData?.asSwitch; else statusBadgeOrDropdown"
                     class="grid-status-switch"
                     [class.is-on]="rowData[col.field]"
                     [class.is-off]="!rowData[col.field]"
@@ -385,6 +385,15 @@
                       (onChange)="onStatusChange(col, rowData.id, $event.checked)"
                     ></p-inputSwitch>
                   </div>
+                  <ng-template #statusBadgeOrDropdown>
+                    <span
+                      *ngIf="col.extraData?.asBadge; else statusDropdown"
+                      class="grid-stage-badge"
+                      [ngClass]="'is-stage-' + rowData[col.field]"
+                    >
+                      {{ getEnumKeyByEnumValue(col.enum, rowData[col.field]) }}
+                    </span>
+                  </ng-template>
                   <ng-template #statusDropdown>
                     <p-dropdown
                       [(ngModel)]="rowData[col.field]"
@@ -418,19 +427,14 @@
 
                 <span *ngSwitchCase="TableHeaderType.Pic">
                   <div class="flex justify-content-center gap-2">
-                    <p-image 
-                    *ngIf="rowData[col.field]"
-                    src="{{backendUrl + rowData[col.field]}}" 
-                    alt="Image" 
-                    width="40" 
-                    [preview]="true" />  
-                    <!-- <p-tag
+                    <p-image
                       *ngIf="rowData[col.field]"
-                      (click)="op.toggle($event)"
-                      value="{{ '::Show' | abpLocalization }}"
-                      [rounded]="true"
-                      style="cursor: pointer"
-                    ></p-tag> -->
+                      [src]="buildMediaUrl(rowData[col.field])"
+                      alt="Image"
+                      width="40"
+                      styleClass="grid-pic"
+                      [preview]="true"
+                    />
                   </div>
                 </span>
                 <div *ngSwitchCase="TableHeaderType.Rating" class="rating-cell" (click)="col.command?.({ id: rowData.id, data: rowData })">
@@ -917,21 +921,15 @@
      <!-- pic-->
 
      <span *ngSwitchCase="TableHeaderType.Pic">
-      
       <div class="flex justify-content-center gap-2">
-        <p-image 
-        *ngIf="rowData[col.field]"
-        src="{{backendUrl + rowData[col.field]}}" 
-        alt="Image" 
-        width="40" 
-        [preview]="true" />  
-        <!-- <p-tag
+        <p-image
           *ngIf="rowData[col.field]"
-          (click)="op.toggle($event)"
-          value="{{ '::Show' | abpLocalization }}"
-          [rounded]="true"
-          style="cursor: pointer"
-        ></p-tag> -->
+          [src]="buildMediaUrl(rowData[col.field])"
+          alt="Image"
+          width="40"
+          styleClass="grid-pic"
+          [preview]="true"
+        />
       </div>
     </span>
 

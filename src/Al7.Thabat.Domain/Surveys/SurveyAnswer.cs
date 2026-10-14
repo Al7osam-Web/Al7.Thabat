@@ -15,6 +15,6 @@ public class SurveyAnswer : Entity<long>
     public virtual SurveyQuestion? SurveyQuestion { get; set; }
     public virtual string? TitleAr { get; set; }
     public virtual string? TitleEn { get; set; }
-    public virtual int Degree { get; set; }
+    public virtual decimal Degree { get; set; }
     public virtual int Sort { get; set; }
 }

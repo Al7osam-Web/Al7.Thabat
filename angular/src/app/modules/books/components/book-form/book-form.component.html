@@ -1,0 +1,68 @@
+<form
+  class="site-page-form books-dialog"
+  *ngIf="!isLoading"
+  [formGroup]="form"
+  (ngSubmit)="save()"
+>
+  <div class="row g-3">
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::Books:NameAr' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="nameAr"
+        [class.is-invalid]="showError('nameAr')"
+      />
+      <small class="site-page-field-error" *ngIf="showError('nameAr')">
+        {{ '::Books:Validation.NameArRequired' | abpLocalization }}
+      </small>
+    </div>
+    <div class="col-12 col-md-6">
+      <label class="form-label">{{ '::Books:NameEn' | abpLocalization }}</label>
+      <input class="form-control" type="text" formControlName="nameEn" dir="ltr" />
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">{{ '::Books:CoverImage' | abpLocalization }}</label>
+      <div class="books-upload">
+        <app-image-upload
+          [imageUrl]="getCoverUrl()"
+          [controlName]="'bookCover'"
+          accept="image/*"
+          [chooseLabel]="'::Books:ChooseCover' | abpLocalization"
+          [changeLabel]="'::Books:ChangeCover' | abpLocalization"
+          (imageSelected)="onCoverSelected($event)"
+          (imageRemoved)="onCoverRemoved()"
+        ></app-image-upload>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 d-flex align-items-end">
+      <div class="books-page__active">
+        <label class="form-label mb-0">{{ '::Books:IsFree' | abpLocalization }}</label>
+        <p-inputSwitch formControlName="isFree"></p-inputSwitch>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 d-flex align-items-end">
+      <div class="books-page__active">
+        <label class="form-label mb-0">{{ '::Books:IsRelapse' | abpLocalization }}</label>
+        <p-inputSwitch formControlName="isRelapse"></p-inputSwitch>
+      </div>
+    </div>
+  </div>
+
+  <div class="books-dialog__footer">
+    <button type="button" class="books-page__refresh" (click)="back()" [disabled]="isSaving">
+      {{ '::Books:Cancel' | abpLocalization }}
+    </button>
+    <button type="submit" class="site-page-form__save-btn" [disabled]="isSaving">
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+      <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+      {{ '::Books:Save' | abpLocalization }}
+    </button>
+  </div>
+</form>
+
+<div *ngIf="isLoading" class="site-page-form__loading">
+  <div class="spinner-border" role="status"></div>
+</div>

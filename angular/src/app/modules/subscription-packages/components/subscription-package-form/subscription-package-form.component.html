@@ -1,0 +1,87 @@
+<form
+  class="site-page-form books-dialog"
+  *ngIf="!isLoading"
+  [formGroup]="form"
+  (ngSubmit)="save()"
+>
+  <div class="row g-3">
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::SubscriptionPackages:NameAr' | abpLocalization }}</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="nameAr"
+        [class.is-invalid]="showError('nameAr')"
+      />
+      <small class="site-page-field-error" *ngIf="showError('nameAr')">
+        {{ '::SubscriptionPackages:Validation.NameArRequired' | abpLocalization }}
+      </small>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label">{{ '::SubscriptionPackages:NameEn' | abpLocalization }}</label>
+      <input class="form-control" type="text" formControlName="nameEn" dir="ltr" />
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::SubscriptionPackages:Period' | abpLocalization }}</label>
+      <select class="form-select" formControlName="period" [class.is-invalid]="showError('period')">
+        <option *ngFor="let option of periodOptions" [ngValue]="option.value">
+          {{ ('::' + option.labelKey) | abpLocalization }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label class="form-label required">{{ '::SubscriptionPackages:Sort' | abpLocalization }}</label>
+      <input class="form-control" type="number" min="1" formControlName="sort" />
+    </div>
+
+    <div class="col-12 col-md-4">
+      <label class="form-label required">{{ '::SubscriptionPackages:Price' | abpLocalization }}</label>
+      <input class="form-control" type="number" min="0" step="0.01" formControlName="price" dir="ltr" />
+    </div>
+
+    <div class="col-12 col-md-4">
+      <label class="form-label required">{{ '::SubscriptionPackages:BilledPrice' | abpLocalization }}</label>
+      <input class="form-control" type="number" min="0" step="0.01" formControlName="billedPrice" dir="ltr" />
+    </div>
+
+    <div class="col-12 col-md-4">
+      <label class="form-label required">{{ '::SubscriptionPackages:OriginalPrice' | abpLocalization }}</label>
+      <input class="form-control" type="number" min="0" step="0.01" formControlName="originalPrice" dir="ltr" />
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">{{ '::SubscriptionPackages:DescriptionAr' | abpLocalization }}</label>
+      <textarea class="form-control" rows="2" formControlName="descriptionAr"></textarea>
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">{{ '::SubscriptionPackages:DescriptionEn' | abpLocalization }}</label>
+      <textarea class="form-control" rows="2" formControlName="descriptionEn" dir="ltr"></textarea>
+    </div>
+
+    <div class="col-12 col-md-6 d-flex align-items-end">
+      <div class="books-page__active">
+        <label class="form-label mb-0">{{ '::SubscriptionPackages:IsFeatured' | abpLocalization }}</label>
+        <p-inputSwitch formControlName="isFeatured"></p-inputSwitch>
+      </div>
+    </div>
+  </div>
+
+  <div class="books-dialog__footer">
+    <button type="button" class="books-page__refresh" (click)="back()" [disabled]="isSaving">
+      {{ '::SubscriptionPackages:Cancel' | abpLocalization }}
+    </button>
+    <button type="submit" class="site-page-form__save-btn" [disabled]="isSaving">
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+      <i *ngIf="!isSaving" class="fa fa-save" aria-hidden="true"></i>
+      {{ '::SubscriptionPackages:Save' | abpLocalization }}
+    </button>
+  </div>
+</form>
+
+<div *ngIf="isLoading" class="site-page-form__loading">
+  <div class="spinner-border" role="status"></div>
+</div>
